@@ -7,191 +7,174 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --bg:    #0f1b2d;
-    --card:  #1a2e47;
-    --bdr:   rgba(255,255,255,0.07);
-    --p1:    #f7c948;
-    --p2:    #4ecdc4;
-    --c1:    #4a90d9;
-    --c2:    #6bcb77;
-    --c3:    #f7c948;
-    --c4:    #f7a54a;
-    --c5:    #f25f5c;
-    --white: #ffffff;
-    --muted: rgba(255,255,255,0.4);
+    --bg:   #0f1b2d; --card: #1a2e47; --bdr: rgba(255,255,255,0.07);
+    --p1:   #f7c948; --p2:  #4ecdc4;
+    --c1:   #4a90d9; --c2:  #6bcb77; --c3: #f7c948; --c4: #f7a54a; --c5: #f25f5c;
+    --white:#ffffff; --muted:rgba(255,255,255,0.4);
   }
-
-  body {
-    font-family: 'Nunito Sans', sans-serif;
-    background: var(--bg);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 24px 16px 60px;
-    color: var(--white);
-  }
-
-  .screen { display: none; flex-direction: column; align-items: center; width: 100%; }
-  .screen.active { display: flex; }
+  body { font-family:'Nunito Sans',sans-serif; background:var(--bg); min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:24px 16px 60px; color:var(--white); }
+  .screen { display:none; flex-direction:column; align-items:center; width:100%; }
+  .screen.active { display:flex; }
 
   /* ── Setup ── */
-  #setup { max-width: 400px; gap: 24px; padding-top: 40px; }
-
-  .setup-title { font-family: 'Nunito', sans-serif; font-size: 2.4rem; font-weight: 900; text-align: center; line-height: 1.1; }
-  .setup-title span { color: var(--p1); }
-  .setup-sub { font-size: 0.88rem; color: var(--muted); text-align: center; margin-top: -12px; }
-
-  .name-group { width: 100%; display: flex; flex-direction: column; gap: 12px; }
-  .name-wrap { display: flex; align-items: center; gap: 10px; background: var(--card); border: 2px solid var(--bdr); border-radius: 14px; padding: 10px 16px; transition: border-color 0.2s; }
-  .name-wrap:focus-within { border-color: rgba(255,255,255,0.25); }
-  .name-wrap.p1 { border-left: 4px solid var(--p1); }
-  .name-wrap.p2 { border-left: 4px solid var(--p2); }
-  .name-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-  .name-wrap.p1 .name-dot { background: var(--p1); }
-  .name-wrap.p2 .name-dot { background: var(--p2); }
-  .name-input { flex: 1; background: transparent; border: none; outline: none; font-family: 'Nunito Sans', sans-serif; font-size: 1rem; font-weight: 700; color: var(--white); }
-  .name-input::placeholder { color: var(--muted); font-weight: 400; }
-
-  .start-btn { width: 100%; padding: 16px; border: none; border-radius: 14px; background: var(--p1); color: #1a1a1a; font-family: 'Nunito', sans-serif; font-size: 1.1rem; font-weight: 900; cursor: pointer; transition: transform 0.15s, filter 0.15s; }
-  .start-btn:hover { transform: translateY(-2px); filter: brightness(1.08); }
-  .start-btn:active { transform: translateY(0); }
+  #setup { max-width:400px; gap:24px; padding-top:40px; }
+  .setup-title { font-family:'Nunito',sans-serif; font-size:2.4rem; font-weight:900; text-align:center; line-height:1.1; }
+  .setup-title span { color:var(--p1); }
+  .setup-sub { font-size:0.88rem; color:var(--muted); text-align:center; margin-top:-12px; }
+  .name-group { width:100%; display:flex; flex-direction:column; gap:12px; }
+  .name-wrap { display:flex; align-items:center; gap:10px; background:var(--card); border:2px solid var(--bdr); border-radius:14px; padding:10px 16px; }
+  .name-wrap.p1 { border-left:4px solid var(--p1); }
+  .name-wrap.p2 { border-left:4px solid var(--p2); }
+  .name-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+  .name-wrap.p1 .name-dot { background:var(--p1); }
+  .name-wrap.p2 .name-dot { background:var(--p2); }
+  .name-input { flex:1; background:transparent; border:none; outline:none; font-family:'Nunito Sans',sans-serif; font-size:1rem; font-weight:700; color:var(--white); }
+  .name-input::placeholder { color:var(--muted); font-weight:400; }
+  .setup-btn-row { width:100%; display:flex; flex-direction:column; gap:10px; }
+  .start-btn { width:100%; padding:16px; border:none; border-radius:14px; background:var(--p1); color:#1a1a1a; font-family:'Nunito',sans-serif; font-size:1.1rem; font-weight:900; cursor:pointer; transition:transform .15s,filter .15s; }
+  .start-btn:hover { transform:translateY(-2px); filter:brightness(1.08); }
+  .manage-link { text-align:center; font-size:0.82rem; color:var(--muted); cursor:pointer; text-decoration:underline; }
+  .manage-link:hover { color:var(--white); }
 
   /* ── Game ── */
-  #game { max-width: 540px; }
+  #game { max-width:540px; }
+  .scoreboard { display:grid; grid-template-columns:1fr 1fr; gap:10px; width:100%; margin-bottom:16px; }
+  .player-score { background:var(--card); border-radius:14px; padding:14px 16px; text-align:center; border:2px solid var(--bdr); transition:border-color .3s,box-shadow .3s; position:relative; overflow:hidden; }
+  .player-score.active-turn { border-color:currentColor; box-shadow:0 0 0 1px currentColor,0 4px 20px rgba(0,0,0,.3); }
+  .player-score.p1 { color:var(--p1); } .player-score.p2 { color:var(--p2); }
+  .player-name { font-family:'Nunito',sans-serif; font-size:.8rem; font-weight:800; letter-spacing:.06em; text-transform:uppercase; opacity:.7; margin-bottom:4px; }
+  .player-points { font-family:'Nunito',sans-serif; font-size:2.4rem; font-weight:900; line-height:1; }
+  .player-pts-label { font-size:.7rem; font-weight:700; opacity:.5; letter-spacing:.06em; text-transform:uppercase; }
+  .turn-arrow { position:absolute; top:8px; right:10px; font-size:.68rem; font-weight:800; opacity:0; transition:opacity .2s; }
+  .player-score.active-turn .turn-arrow { opacity:1; }
+  .progress-row { display:flex; align-items:center; gap:10px; width:100%; margin-bottom:14px; }
+  .progress-track { flex:1; height:5px; background:rgba(255,255,255,.08); border-radius:3px; overflow:hidden; }
+  .progress-fill { height:100%; background:linear-gradient(90deg,var(--p1),var(--p2)); border-radius:3px; transition:width .4s; }
+  .progress-label { font-family:'Nunito',sans-serif; font-size:.75rem; font-weight:800; color:var(--muted); white-space:nowrap; }
+  .turn-banner { font-family:'Nunito',sans-serif; font-size:.85rem; font-weight:800; letter-spacing:.06em; text-transform:uppercase; margin-bottom:14px; opacity:.8; }
 
-  .scoreboard { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; margin-bottom: 16px; }
-  .player-score { background: var(--card); border-radius: 14px; padding: 14px 16px; text-align: center; border: 2px solid var(--bdr); transition: border-color 0.3s, box-shadow 0.3s; position: relative; overflow: hidden; }
-  .player-score.active-turn { border-color: currentColor; box-shadow: 0 0 0 1px currentColor, 0 4px 20px rgba(0,0,0,0.3); }
-  .player-score.p1 { color: var(--p1); }
-  .player-score.p2 { color: var(--p2); }
-  .player-name { font-family: 'Nunito', sans-serif; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.7; margin-bottom: 4px; }
-  .player-points { font-family: 'Nunito', sans-serif; font-size: 2.4rem; font-weight: 900; line-height: 1; }
-  .player-pts-label { font-size: 0.7rem; font-weight: 700; opacity: 0.5; letter-spacing: 0.06em; text-transform: uppercase; }
-  .turn-arrow { position: absolute; top: 8px; right: 10px; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.04em; opacity: 0; transition: opacity 0.2s; }
-  .player-score.active-turn .turn-arrow { opacity: 1; }
+  /* Pick phase */
+  #pickPhase { width:100%; }
+  .pick-label { font-family:'Nunito',sans-serif; font-size:.78rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); text-align:center; margin-bottom:10px; }
+  .pt-pick-row { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; width:100%; }
+  .pt-pick-btn { padding:18px 4px; border:none; border-radius:14px; font-family:'Nunito',sans-serif; font-size:1.5rem; font-weight:900; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:4px; transition:transform .15s,filter .15s,box-shadow .15s; }
+  .pt-pick-btn:hover { transform:translateY(-4px); filter:brightness(1.1); box-shadow:0 6px 20px rgba(0,0,0,.3); }
+  .pt-pick-btn .pt-sub { font-size:.58rem; font-weight:800; letter-spacing:.05em; text-transform:uppercase; opacity:.75; }
+  .pt-pick-btn[data-pts="1"] { background:var(--c1); color:#fff; }
+  .pt-pick-btn[data-pts="2"] { background:var(--c2); color:#0f2010; }
+  .pt-pick-btn[data-pts="3"] { background:var(--c3); color:#2a1a00; }
+  .pt-pick-btn[data-pts="4"] { background:var(--c4); color:#2a1000; }
+  .pt-pick-btn[data-pts="5"] { background:var(--c5); color:#fff; }
 
-  .progress-row { display: flex; align-items: center; gap: 10px; width: 100%; margin-bottom: 14px; }
-  .progress-track { flex: 1; height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; }
-  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--p1), var(--p2)); border-radius: 3px; transition: width 0.4s ease; }
-  .progress-label { font-family: 'Nunito', sans-serif; font-size: 0.75rem; font-weight: 800; color: var(--muted); white-space: nowrap; }
+  /* Sign phase */
+  #signPhase { width:100%; }
+  .phrase-card { width:100%; background:var(--card); border-radius:20px; overflow:hidden; margin-bottom:14px; border:2px solid var(--bdr); }
+  .phrase-card-header { display:flex; align-items:center; justify-content:space-between; padding:14px 18px 10px; }
+  .phrase-card-title { font-family:'Nunito',sans-serif; font-size:.78rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+  .pts-chip { font-family:'Nunito',sans-serif; font-size:.75rem; font-weight:900; padding:3px 10px; border-radius:20px; }
 
-  .turn-banner { font-family: 'Nunito', sans-serif; font-size: 0.85rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 14px; opacity: 0.8; }
+  /* Video area */
+  .video-wrap { width:100%; aspect-ratio:16/9; background:#000; position:relative; display:flex; align-items:center; justify-content:center; }
+  .video-wrap video { width:100%; height:100%; object-fit:cover; display:block; }
+  .video-placeholder-msg { font-family:'Nunito',sans-serif; font-size:.8rem; font-weight:700; color:rgba(255,255,255,.3); text-align:center; padding:20px; }
 
-  /* ── Pick phase ── */
-  #pickPhase { width: 100%; }
-  .pick-label { font-family: 'Nunito', sans-serif; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-align: center; margin-bottom: 10px; }
+  .reveal-btn { width:100%; padding:16px; border:1px solid rgba(255,255,255,.12); border-radius:14px; background:rgba(255,255,255,.08); color:var(--white); font-family:'Nunito',sans-serif; font-size:1rem; font-weight:900; cursor:pointer; margin-bottom:12px; transition:background .2s; }
+  .reveal-btn:hover { background:rgba(255,255,255,.13); }
+  .answer-box { width:100%; background:var(--card); border-radius:16px; padding:20px 22px; margin-bottom:12px; border:2px solid var(--bdr); text-align:center; display:none; }
+  .answer-box.shown { display:block; }
+  .answer-eyebrow { font-size:.68rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
+  .answer-text { font-family:'Nunito',sans-serif; font-size:clamp(1.1rem,4vw,1.5rem); font-weight:800; color:var(--white); line-height:1.3; }
+  .answer-category { font-size:.7rem; font-weight:700; color:var(--muted); letter-spacing:.06em; text-transform:uppercase; margin-top:8px; }
+  .result-row { display:none; grid-template-columns:1fr 1fr; gap:10px; width:100%; margin-bottom:10px; }
+  .result-row.shown { display:grid; }
+  .result-btn { padding:15px; border:none; border-radius:14px; font-family:'Nunito',sans-serif; font-size:.95rem; font-weight:900; cursor:pointer; transition:transform .15s,filter .15s; }
+  .result-btn:hover { transform:translateY(-2px); filter:brightness(1.1); }
+  .btn-nailed { background:#6bcb77; color:#0f2010; }
+  .btn-missed { background:rgba(255,255,255,.07); color:rgba(255,255,255,.55); border:1px solid rgba(255,255,255,.1); }
+  .skip-btn { width:100%; padding:11px; border:1px solid rgba(255,255,255,.08); border-radius:12px; background:transparent; color:var(--muted); font-family:'Nunito Sans',sans-serif; font-size:.82rem; font-weight:600; cursor:pointer; transition:background .15s,color .15s; }
+  .skip-btn:hover { background:rgba(255,255,255,.05); color:var(--white); }
 
-  .pt-pick-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; width: 100%; }
-  .pt-pick-btn { padding: 18px 4px; border: none; border-radius: 14px; font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: 900; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; transition: transform 0.15s, filter 0.15s, box-shadow 0.15s; }
-  .pt-pick-btn:hover { transform: translateY(-4px); filter: brightness(1.1); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
-  .pt-pick-btn:active { transform: translateY(0); }
-  .pt-pick-btn .pt-sub { font-size: 0.58rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; opacity: 0.75; }
-  .pt-pick-btn[data-pts="1"] { background: var(--c1); color: #fff; }
-  .pt-pick-btn[data-pts="2"] { background: var(--c2); color: #0f2010; }
-  .pt-pick-btn[data-pts="3"] { background: var(--c3); color: #2a1a00; }
-  .pt-pick-btn[data-pts="4"] { background: var(--c4); color: #2a1000; }
-  .pt-pick-btn[data-pts="5"] { background: var(--c5); color: #fff; }
+  /* Point pop */
+  .point-pop { position:fixed; font-family:'Nunito',sans-serif; font-size:2rem; font-weight:900; pointer-events:none; animation:popUp 1s ease forwards; z-index:100; }
+  @keyframes popUp { 0%{opacity:1;transform:translateY(0) scale(1)} 60%{opacity:1;transform:translateY(-60px) scale(1.3)} 100%{opacity:0;transform:translateY(-100px) scale(.9)} }
 
-  /* ── Sign phase ── */
-  #signPhase { width: 100%; }
+  /* Winner */
+  #winner { max-width:420px; gap:20px; padding-top:20px; text-align:center; }
+  .winner-emoji { font-size:5rem; line-height:1; }
+  .winner-title { font-family:'Nunito',sans-serif; font-size:2.2rem; font-weight:900; line-height:1.1; }
+  .winner-sub { font-size:.9rem; color:var(--muted); }
+  .final-scores { display:grid; grid-template-columns:1fr 1fr; gap:12px; width:100%; }
+  .final-score-box { background:var(--card); border-radius:16px; padding:20px; text-align:center; }
+  .final-score-box.winner-box { border:2px solid currentColor; }
+  .final-score-box.p1 { color:var(--p1); } .final-score-box.p2 { color:var(--p2); }
+  .final-name { font-family:'Nunito',sans-serif; font-size:.8rem; font-weight:800; opacity:.7; text-transform:uppercase; letter-spacing:.06em; margin-bottom:6px; }
+  .final-pts { font-family:'Nunito',sans-serif; font-size:2.8rem; font-weight:900; line-height:1; }
+  .play-again-btn { width:100%; padding:16px; border:none; border-radius:14px; background:var(--p1); color:#1a1a1a; font-family:'Nunito',sans-serif; font-size:1.1rem; font-weight:900; cursor:pointer; transition:transform .15s,filter .15s; }
+  .play-again-btn:hover { transform:translateY(-2px); filter:brightness(1.08); }
 
-  /* Video card */
-  .video-card { width: 100%; background: var(--card); border-radius: 20px; overflow: hidden; margin-bottom: 14px; border: 2px solid var(--bdr); position: relative; }
-  .video-card-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px 10px; }
-  .video-card-title { font-family: 'Nunito', sans-serif; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
-  .pts-chip { font-family: 'Nunito', sans-serif; font-size: 0.75rem; font-weight: 900; padding: 3px 10px; border-radius: 20px; }
+  /* ── Manage screen ── */
+  #manage { max-width:560px; gap:20px; padding-top:20px; }
+  .manage-title { font-family:'Nunito',sans-serif; font-size:1.6rem; font-weight:900; text-align:center; }
+  .manage-title span { color:var(--p1); }
+  .manage-note { font-size:0.8rem; color:var(--muted); text-align:center; margin-top:-10px; line-height:1.5; }
 
-  .video-wrap { width: 100%; aspect-ratio: 16/9; background: #000; }
-  .video-wrap iframe { width: 100%; height: 100%; border: none; display: block; }
+  /* Add form */
+  .add-form { width:100%; background:var(--card); border-radius:16px; padding:18px; border:2px solid var(--bdr); display:flex; flex-direction:column; gap:10px; }
+  .add-form-title { font-family:'Nunito',sans-serif; font-size:.75rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+  .form-row { display:flex; gap:8px; }
+  .form-input { flex:1; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12); border-radius:10px; padding:10px 12px; font-family:'Nunito Sans',sans-serif; font-size:.9rem; color:var(--white); outline:none; }
+  .form-input::placeholder { color:var(--muted); }
+  .form-input:focus { border-color:rgba(255,255,255,.3); }
+  .form-select { background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12); border-radius:10px; padding:10px 12px; font-family:'Nunito Sans',sans-serif; font-size:.9rem; color:var(--white); outline:none; cursor:pointer; }
+  .form-select option { background:#1a2e47; }
+  .add-btn { padding:11px 18px; border:none; border-radius:10px; background:var(--p1); color:#1a1a1a; font-family:'Nunito',sans-serif; font-size:.9rem; font-weight:900; cursor:pointer; white-space:nowrap; }
 
-  /* Answer reveal */
-  .reveal-btn { width: 100%; padding: 16px; border: none; border-radius: 14px; background: rgba(255,255,255,0.08); color: var(--white); font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 900; cursor: pointer; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.12); transition: background 0.2s; letter-spacing: 0.02em; }
-  .reveal-btn:hover { background: rgba(255,255,255,0.13); }
+  /* Phrase list */
+  .phrase-list-wrap { width:100%; }
+  .tier-section { margin-bottom:20px; }
+  .tier-label { font-family:'Nunito',sans-serif; font-size:.72rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; padding-left:4px; }
+  .phrase-item { display:flex; align-items:center; gap:10px; background:var(--card); border-radius:12px; padding:12px 14px; margin-bottom:6px; border:1px solid var(--bdr); }
+  .phrase-item-text { flex:1; font-size:.9rem; font-weight:600; color:var(--white); line-height:1.3; }
+  .phrase-item-cat { font-size:.68rem; font-weight:700; color:var(--muted); letter-spacing:.06em; text-transform:uppercase; white-space:nowrap; }
+  .phrase-item-video { font-size:.68rem; color:rgba(255,255,255,.25); margin-top:2px; }
+  .delete-btn { background:rgba(242,95,92,.15); border:1px solid rgba(242,95,92,.25); color:#f25f5c; border-radius:8px; padding:5px 10px; font-family:'Nunito',sans-serif; font-size:.75rem; font-weight:800; cursor:pointer; white-space:nowrap; transition:background .15s; }
+  .delete-btn:hover { background:rgba(242,95,92,.3); }
+  .back-btn { width:100%; padding:13px; border:1px solid rgba(255,255,255,.1); border-radius:12px; background:transparent; color:rgba(255,255,255,.5); font-family:'Nunito',sans-serif; font-size:.9rem; font-weight:800; cursor:pointer; }
+  .back-btn:hover { background:rgba(255,255,255,.05); color:var(--white); }
 
-  .answer-box { width: 100%; background: var(--card); border-radius: 16px; padding: 20px 22px; margin-bottom: 12px; border: 2px solid var(--bdr); text-align: center; display: none; }
-  .answer-box.shown { display: block; }
-  .answer-eyebrow { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
-  .answer-text { font-family: 'Nunito', sans-serif; font-size: clamp(1.15rem, 4vw, 1.5rem); font-weight: 800; color: var(--white); line-height: 1.3; }
-  .answer-category { font-size: 0.7rem; font-weight: 700; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 8px; }
-
-  .result-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; margin-bottom: 10px; display: none; }
-  .result-row.shown { display: grid; }
-  .result-btn { padding: 15px; border: none; border-radius: 14px; font-family: 'Nunito', sans-serif; font-size: 0.95rem; font-weight: 900; cursor: pointer; transition: transform 0.15s, filter 0.15s; }
-  .result-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
-  .result-btn:active { transform: translateY(0); }
-  .btn-nailed { background: #6bcb77; color: #0f2010; }
-  .btn-missed { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.55); border: 1px solid rgba(255,255,255,0.1); }
-
-  .skip-btn { width: 100%; padding: 11px; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; background: transparent; color: var(--muted); font-family: 'Nunito Sans', sans-serif; font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: background 0.15s, color 0.15s; }
-  .skip-btn:hover { background: rgba(255,255,255,0.05); color: var(--white); }
-
-  /* ── Point pop ── */
-  .point-pop { position: fixed; font-family: 'Nunito', sans-serif; font-size: 2rem; font-weight: 900; pointer-events: none; animation: popUp 1s ease forwards; z-index: 100; }
-  @keyframes popUp {
-    0%   { opacity: 1; transform: translateY(0) scale(1); }
-    60%  { opacity: 1; transform: translateY(-60px) scale(1.3); }
-    100% { opacity: 0; transform: translateY(-100px) scale(0.9); }
-  }
-
-  /* ── Winner ── */
-  #winner { max-width: 420px; gap: 20px; padding-top: 20px; text-align: center; }
-  .winner-emoji { font-size: 5rem; line-height: 1; }
-  .winner-title { font-family: 'Nunito', sans-serif; font-size: 2.2rem; font-weight: 900; line-height: 1.1; }
-  .winner-sub { font-size: 0.9rem; color: var(--muted); }
-
-  .final-scores { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; }
-  .final-score-box { background: var(--card); border-radius: 16px; padding: 20px; text-align: center; }
-  .final-score-box.winner-box { border: 2px solid currentColor; }
-  .final-score-box.p1 { color: var(--p1); }
-  .final-score-box.p2 { color: var(--p2); }
-  .final-name { font-family: 'Nunito', sans-serif; font-size: 0.8rem; font-weight: 800; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
-  .final-pts { font-family: 'Nunito', sans-serif; font-size: 2.8rem; font-weight: 900; line-height: 1; }
-
-  .play-again-btn { width: 100%; padding: 16px; border: none; border-radius: 14px; background: var(--p1); color: #1a1a1a; font-family: 'Nunito', sans-serif; font-size: 1.1rem; font-weight: 900; cursor: pointer; transition: transform 0.15s, filter 0.15s; }
-  .play-again-btn:hover { transform: translateY(-2px); filter: brightness(1.08); }
+  .empty-tier { font-size:.82rem; color:rgba(255,255,255,.2); padding:8px 4px; font-style:italic; }
 </style>
 </head>
 <body>
 
-<!-- ── Setup ── -->
+<!-- Setup -->
 <div id="setup" class="screen active">
   <div class="setup-title">ASL<br><span>Sign Game</span> 🤟</div>
-  <p class="setup-sub">Pick your points, watch the video, sign it, then reveal the answer!</p>
+  <p class="setup-sub">Pick your points, watch the video, sign it, reveal the answer!</p>
   <div class="name-group">
-    <div class="name-wrap p1"><div class="name-dot"></div><input class="name-input" id="name1" type="text" placeholder="Player 1 name" maxlength="14" /></div>
-    <div class="name-wrap p2"><div class="name-dot"></div><input class="name-input" id="name2" type="text" placeholder="Player 2 name" maxlength="14" /></div>
+    <div class="name-wrap p1"><div class="name-dot"></div><input class="name-input" id="name1" type="text" placeholder="Player 1 name" maxlength="14"/></div>
+    <div class="name-wrap p2"><div class="name-dot"></div><input class="name-input" id="name2" type="text" placeholder="Player 2 name" maxlength="14"/></div>
   </div>
-  <button class="start-btn" onclick="startGame()">Let's play! 🤟</button>
+  <div class="setup-btn-row">
+    <button class="start-btn" onclick="startGame()">Let's play! 🤟</button>
+    <span class="manage-link" onclick="show('manage');renderManage()">⚙️ Manage phrases</span>
+  </div>
 </div>
 
-<!-- ── Game ── -->
+<!-- Game -->
 <div id="game" class="screen">
   <div class="scoreboard">
-    <div class="player-score p1" id="scoreCard1">
-      <div class="turn-arrow">YOUR TURN ▶</div>
-      <div class="player-name" id="pName1">Player 1</div>
-      <div class="player-points" id="pScore1">0</div>
-      <div class="player-pts-label">pts</div>
-    </div>
-    <div class="player-score p2" id="scoreCard2">
-      <div class="turn-arrow">YOUR TURN ▶</div>
-      <div class="player-name" id="pName2">Player 2</div>
-      <div class="player-points" id="pScore2">0</div>
-      <div class="player-pts-label">pts</div>
-    </div>
+    <div class="player-score p1" id="scoreCard1"><div class="turn-arrow">YOUR TURN ▶</div><div class="player-name" id="pName1">P1</div><div class="player-points" id="pScore1">0</div><div class="player-pts-label">pts</div></div>
+    <div class="player-score p2" id="scoreCard2"><div class="turn-arrow">YOUR TURN ▶</div><div class="player-name" id="pName2">P2</div><div class="player-points" id="pScore2">0</div><div class="player-pts-label">pts</div></div>
   </div>
-
   <div class="progress-row">
     <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
     <span class="progress-label" id="progressLabel"></span>
   </div>
-
   <div class="turn-banner" id="turnBanner"></div>
 
-  <!-- Phase 1: Pick points -->
+  <!-- Pick -->
   <div id="pickPhase">
     <div class="pick-label">Choose your difficulty 👇</div>
     <div class="pt-pick-row">
@@ -203,40 +186,36 @@
     </div>
   </div>
 
-  <!-- Phase 2: Watch, sign, reveal -->
+  <!-- Sign -->
   <div id="signPhase" style="display:none;">
-    <div class="video-card">
-      <div class="video-card-header">
-        <span class="video-card-title">Watch &amp; Sign</span>
+    <div class="phrase-card">
+      <div class="phrase-card-header">
+        <span class="phrase-card-title">Watch &amp; Sign</span>
         <span class="pts-chip" id="ptsChip"></span>
       </div>
-      <div class="video-wrap">
-        <iframe id="videoFrame" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+      <div class="video-wrap" id="videoWrap">
+        <div class="video-placeholder-msg" id="videoPlaceholder">📹 Video coming soon</div>
       </div>
     </div>
-
     <button class="reveal-btn" id="revealBtn" onclick="revealAnswer()">👀 Reveal Answer</button>
-
     <div class="answer-box" id="answerBox">
       <div class="answer-eyebrow">The phrase was…</div>
       <div class="answer-text" id="answerText"></div>
       <div class="answer-category" id="answerCategory"></div>
     </div>
-
     <div class="result-row" id="resultRow">
       <button class="result-btn btn-missed" onclick="result(false)">✗ Missed it</button>
       <button class="result-btn btn-nailed" onclick="result(true)">✓ Nailed it!</button>
     </div>
-
     <button class="skip-btn" onclick="skipTurn()">Skip → (no points)</button>
   </div>
 </div>
 
-<!-- ── Winner ── -->
+<!-- Winner -->
 <div id="winner" class="screen">
   <div class="winner-emoji" id="winnerEmoji"></div>
   <div class="winner-title" id="winnerTitle"></div>
-  <div class="winner-sub"   id="winnerSub"></div>
+  <div class="winner-sub" id="winnerSub"></div>
   <div class="final-scores">
     <div class="final-score-box p1" id="finalBox1"><div class="final-name" id="finalName1"></div><div class="final-pts" id="finalPts1"></div></div>
     <div class="final-score-box p2" id="finalBox2"><div class="final-name" id="finalName2"></div><div class="final-pts" id="finalPts2"></div></div>
@@ -244,104 +223,156 @@
   <button class="play-again-btn" onclick="playAgain()">Play again! 🤟</button>
 </div>
 
+<!-- Manage -->
+<div id="manage" class="screen">
+  <div class="manage-title">⚙️ Manage <span>Phrases</span></div>
+  <p class="manage-note">Add your own phrases and assign a difficulty. When you record a video, name the file exactly as shown and place it in the same folder as this HTML file.</p>
+
+  <div class="add-form">
+    <div class="add-form-title">Add a new phrase</div>
+    <input class="form-input" id="newPhrase" type="text" placeholder="Type the phrase…" />
+    <div class="form-row">
+      <input class="form-input" id="newCategory" type="text" placeholder="Category (e.g. Greetings)" style="flex:1"/>
+      <select class="form-select" id="newTier">
+        <option value="1">1 — Easy</option>
+        <option value="2">2 — Medium</option>
+        <option value="3" selected>3 — Hard</option>
+        <option value="4">4 — Expert</option>
+        <option value="5">5 — Champ</option>
+      </select>
+      <button class="add-btn" onclick="addPhrase()">Add</button>
+    </div>
+  </div>
+
+  <div class="phrase-list-wrap" id="phraseListWrap"></div>
+  <button class="back-btn" onclick="show('setup')">← Back to game</button>
+</div>
+
 <script>
-// ─── Phrase bank ─────────────────────────────────────────────
-// videoId: YouTube video ID
-// Each tier gets progressively more complex phrases
-// Videos sourced from Dr. Bill Vicars (Lifeprint.com / youtube.com/billvicars)
-// and other reputable ASL channels
+// ─── Default phrase bank ──────────────────────────────────────
+// video: filename of your recorded video (place in same folder as this file)
+// Leave video blank — fill in as you record them
+const DEFAULT_PHRASES = [
+  // ── Tier 1: Easy — single words / very short ──
+  { text:"Hello!",            category:"Greetings",    tier:1, video:"" },
+  { text:"Goodbye.",          category:"Greetings",    tier:1, video:"" },
+  { text:"Please.",           category:"Basics",       tier:1, video:"" },
+  { text:"Thank you.",        category:"Basics",       tier:1, video:"" },
+  { text:"You're welcome.",   category:"Basics",       tier:1, video:"" },
+  { text:"Sorry.",            category:"Basics",       tier:1, video:"" },
+  { text:"Yes.",              category:"Basics",       tier:1, video:"" },
+  { text:"No.",               category:"Basics",       tier:1, video:"" },
+  { text:"Help!",             category:"Basics",       tier:1, video:"" },
+  { text:"I love you.",       category:"Feelings",     tier:1, video:"" },
+  { text:"More.",             category:"Basics",       tier:1, video:"" },
+  { text:"Stop.",             category:"Basics",       tier:1, video:"" },
 
-const phrases = {
-  1: [
-    { text: "I love you.",        category: "Basics",    videoId: "INaTN47eOCs" }, // Bill Vicars Phrases 01
-    { text: "Thank you.",         category: "Greetings", videoId: "RlTQEv5I_Y0" }, // ASL Greetings & Polite Phrases
-    { text: "Please.",            category: "Basics",    videoId: "RlTQEv5I_Y0" },
-    { text: "You're welcome.",    category: "Greetings", videoId: "RlTQEv5I_Y0" },
-    { text: "Hello!",             category: "Greetings", videoId: "RlTQEv5I_Y0" },
-    { text: "Good morning.",      category: "Greetings", videoId: "RlTQEv5I_Y0" },
-    { text: "Goodbye.",           category: "Greetings", videoId: "RlTQEv5I_Y0" },
-    { text: "Sorry.",             category: "Basics",    videoId: "RlTQEv5I_Y0" },
-    { text: "Yes.",               category: "Basics",    videoId: "ianCxd71xIo" }, // 100 Basic Signs
-    { text: "No.",                category: "Basics",    videoId: "ianCxd71xIo" },
-  ],
-  2: [
-    { text: "How are you?",           category: "Greetings", videoId: "RlTQEv5I_Y0" },
-    { text: "Nice to meet you.",      category: "Greetings", videoId: "F7Wjb_AIvMA" }, // Bill Vicars - Nice to meet you
-    { text: "My name is ___.",        category: "Greetings", videoId: "dBWoWoderAg" }, // Greetings in ASL / my name is
-    { text: "See you later.",         category: "Greetings", videoId: "RlTQEv5I_Y0" },
-    { text: "I am happy.",            category: "Feelings",  videoId: "v1desDduz5M" }, // 20+ Basic Phrases
-    { text: "I am tired.",            category: "Feelings",  videoId: "v1desDduz5M" },
-    { text: "I am hungry.",           category: "Feelings",  videoId: "v1desDduz5M" },
-    { text: "I don't know.",          category: "Basics",    videoId: "ianCxd71xIo" },
-    { text: "Help me.",               category: "Basics",    videoId: "INaTN47eOCs" },
-    { text: "Good night.",            category: "Greetings", videoId: "RlTQEv5I_Y0" },
-  ],
-  3: [
-    { text: "What is your name?",      category: "Greetings",    videoId: "dBWoWoderAg" },
-    { text: "I don't understand.",     category: "Basics",       videoId: "DLVC1ZACCkA" }, // 25 ASL Phrases
-    { text: "Can you help me?",        category: "Basics",       videoId: "DLVC1ZACCkA" },
-    { text: "Where is the bathroom?",  category: "Places",       videoId: "INaTN47eOCs" }, // Bill Vicars Phrases 01
-    { text: "I am learning ASL.",      category: "Basics",       videoId: "DLVC1ZACCkA" },
-    { text: "What time is it?",        category: "Time",         videoId: "v1desDduz5M" },
-    { text: "I am busy today.",        category: "Time",         videoId: "v1desDduz5M" },
-    { text: "Do you have a dog?",      category: "Family",       videoId: "INaTN47eOCs" },
-    { text: "I live in Oklahoma.",     category: "Places",       videoId: "v1desDduz5M" },
-    { text: "Are you okay?",           category: "Feelings",     videoId: "DLVC1ZACCkA" },
-  ],
-  4: [
-    { text: "Can you please sign slower?",    category: "Basics",  videoId: "DLVC1ZACCkA" },
-    { text: "What is your favorite color?",   category: "Basics",  videoId: "DLVC1ZACCkA" },
-    { text: "I have a brother and a sister.", category: "Family",  videoId: "INaTN47eOCs" },
-    { text: "Do you want to play outside?",   category: "Basics",  videoId: "INaTN47eOCs" },
-    { text: "What school do you go to?",      category: "School",  videoId: "DLVC1ZACCkA" },
-    { text: "My mom is at the store.",        category: "Family",  videoId: "v1desDduz5M" },
-    { text: "I like pizza and hamburgers.",   category: "Food",    videoId: "v1desDduz5M" },
-    { text: "Can I have some water please?",  category: "Basics",  videoId: "DLVC1ZACCkA" },
-    { text: "What do you want to eat?",       category: "Food",    videoId: "INaTN47eOCs" },
-    { text: "How far away do you live?",      category: "Places",  videoId: "v1desDduz5M" },
-  ],
-  5: [
-    { text: "What do you want to do today?",            category: "Basics",  videoId: "ChiWKqGbxYc" }, // 101 Most Searched
-    { text: "My favorite subject in school is math.",   category: "School",  videoId: "ChiWKqGbxYc" },
-    { text: "I want to learn more signs every day.",    category: "Basics",  videoId: "ChiWKqGbxYc" },
-    { text: "Can you show me how to sign that again?",  category: "Basics",  videoId: "ChiWKqGbxYc" },
-    { text: "What is your favorite movie or show?",     category: "Basics",  videoId: "ChiWKqGbxYc" },
-    { text: "I have been learning ASL for a while.",    category: "Basics",  videoId: "ChiWKqGbxYc" },
-    { text: "Where do you want to go for dinner?",      category: "Food",    videoId: "ChiWKqGbxYc" },
-    { text: "My birthday is coming up really soon.",    category: "Family",  videoId: "ChiWKqGbxYc" },
-    { text: "I don't understand, can you repeat that?", category: "Basics",  videoId: "ChiWKqGbxYc" },
-    { text: "We should practice signing every day.",    category: "Basics",  videoId: "ChiWKqGbxYc" },
-  ],
-};
+  // ── Tier 2: Medium — short sentences ──
+  { text:"How are you?",          category:"Greetings",  tier:2, video:"" },
+  { text:"I am happy.",           category:"Feelings",   tier:2, video:"" },
+  { text:"I am sad.",             category:"Feelings",   tier:2, video:"" },
+  { text:"I am tired.",           category:"Feelings",   tier:2, video:"" },
+  { text:"I am hungry.",          category:"Feelings",   tier:2, video:"" },
+  { text:"I am scared.",          category:"Feelings",   tier:2, video:"" },
+  { text:"Good morning.",         category:"Greetings",  tier:2, video:"" },
+  { text:"Good night.",           category:"Greetings",  tier:2, video:"" },
+  { text:"See you later.",        category:"Greetings",  tier:2, video:"" },
+  { text:"Nice to meet you.",     category:"Greetings",  tier:2, video:"" },
+  { text:"My name is ___.",       category:"Greetings",  tier:2, video:"" },
+  { text:"I don't know.",         category:"Basics",     tier:2, video:"" },
+  { text:"Can you help me?",      category:"Basics",     tier:2, video:"" },
+  { text:"I don't understand.",   category:"Basics",     tier:2, video:"" },
+  { text:"Wait a minute.",        category:"Basics",     tier:2, video:"" },
+  { text:"Come here.",            category:"Basics",     tier:2, video:"" },
+  { text:"Sit down.",             category:"Basics",     tier:2, video:"" },
+  { text:"Good job!",             category:"Basics",     tier:2, video:"" },
+  { text:"Be quiet.",             category:"Basics",     tier:2, video:"" },
+  { text:"I am fine.",            category:"Feelings",   tier:2, video:"" },
 
+  // ── Tier 3: Hard — medium sentences ──
+  { text:"What is your name?",       category:"Greetings",    tier:3, video:"" },
+  { text:"Where are you from?",      category:"Greetings",    tier:3, video:"" },
+  { text:"Where is the bathroom?",   category:"Places",       tier:3, video:"" },
+  { text:"I am learning ASL.",       category:"Basics",       tier:3, video:"" },
+  { text:"Please sign slower.",      category:"Basics",       tier:3, video:"" },
+  { text:"What time is it?",         category:"Time",         tier:3, video:"" },
+  { text:"What day is today?",       category:"Time",         tier:3, video:"" },
+  { text:"I am busy today.",         category:"Time",         tier:3, video:"" },
+  { text:"Do you have a dog?",       category:"Family",       tier:3, video:"" },
+  { text:"How old are you?",         category:"Basics",       tier:3, video:"" },
+  { text:"I live in Oklahoma.",      category:"Places",       tier:3, video:"" },
+  { text:"Are you okay?",            category:"Feelings",     tier:3, video:"" },
+  { text:"I need to go.",            category:"Basics",       tier:3, video:"" },
+  { text:"Let's go outside.",        category:"Basics",       tier:3, video:"" },
+  { text:"Do you want food?",        category:"Food",         tier:3, video:"" },
+
+  // ── Tier 4: Expert — longer sentences ──
+  { text:"Can you please sign slower?",    category:"Basics",  tier:4, video:"" },
+  { text:"What is your favorite color?",   category:"Basics",  tier:4, video:"" },
+  { text:"I have a brother and a sister.", category:"Family",  tier:4, video:"" },
+  { text:"Do you want to play outside?",   category:"Basics",  tier:4, video:"" },
+  { text:"What school do you go to?",      category:"School",  tier:4, video:"" },
+  { text:"Can I have some water please?",  category:"Basics",  tier:4, video:"" },
+  { text:"What do you want to eat?",       category:"Food",    tier:4, video:"" },
+  { text:"My mom is at the store.",        category:"Family",  tier:4, video:"" },
+  { text:"I like pizza and hamburgers.",   category:"Food",    tier:4, video:"" },
+  { text:"See you tomorrow at school.",    category:"School",  tier:4, video:"" },
+  { text:"I need help with my homework.",  category:"School",  tier:4, video:"" },
+  { text:"What is your favorite sport?",   category:"Basics",  tier:4, video:"" },
+
+  // ── Tier 5: Champ — complex sentences ──
+  { text:"What do you want to do today?",            category:"Basics",  tier:5, video:"" },
+  { text:"My favorite subject in school is math.",   category:"School",  tier:5, video:"" },
+  { text:"Can you show me how to sign that again?",  category:"Basics",  tier:5, video:"" },
+  { text:"I don't understand, can you repeat that?", category:"Basics",  tier:5, video:"" },
+  { text:"Where do you want to go for dinner?",      category:"Food",    tier:5, video:"" },
+  { text:"I have been learning ASL for a while.",    category:"Basics",  tier:5, video:"" },
+  { text:"My birthday is coming up really soon.",    category:"Family",  tier:5, video:"" },
+  { text:"We should practice signing every day.",    category:"Basics",  tier:5, video:"" },
+  { text:"What is your favorite movie or show?",     category:"Basics",  tier:5, video:"" },
+  { text:"I want to learn more signs every day.",    category:"Basics",  tier:5, video:"" },
+];
+
+// ─── State — persisted in localStorage ───────────────────────
+function loadPhrases() {
+  try {
+    const saved = localStorage.getItem('asl_phrases');
+    if (saved) return JSON.parse(saved);
+  } catch(e) {}
+  return JSON.parse(JSON.stringify(DEFAULT_PHRASES));
+}
+
+function savePhrases() {
+  try { localStorage.setItem('asl_phrases', JSON.stringify(allPhrases)); } catch(e) {}
+}
+
+let allPhrases = loadPhrases();
+
+// ─── Game state ───────────────────────────────────────────────
+let queues = {}, turn = 0, scores = [0,0], names = ['Player 1','Player 2'];
+let roundNum = 0, totalRounds = 10, chosenPts = 0, currentCard = null;
 const ptColors = ['','var(--c1)','var(--c2)','var(--c3)','var(--c4)','var(--c5)'];
 const ptLabels = ['','Easy','Medium','Hard','Expert','Champ'];
 
-let queues     = {};
-let turn       = 0;
-let scores     = [0, 0];
-let names      = ['Player 1', 'Player 2'];
-let roundNum   = 0;
-let totalRounds = 10;
-let chosenPts  = 0;
-let currentCard = null;
-
 function shuffle(arr) {
   const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
+  for (let i = a.length-1; i>0; i--) { const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
   return a;
 }
 
 function buildQueues() {
   queues = {};
-  for (let t = 1; t <= 5; t++) queues[t] = shuffle([...phrases[t]]);
+  for (let t=1; t<=5; t++) {
+    const tier = allPhrases.filter(p => p.tier === t);
+    queues[t] = shuffle(tier.length ? tier : allPhrases); // fallback if tier empty
+  }
 }
 
 function drawPhrase(tier) {
-  if (!queues[tier].length) queues[tier] = shuffle([...phrases[tier]]);
+  if (!queues[tier] || !queues[tier].length) {
+    const tier_phrases = allPhrases.filter(p => p.tier === tier);
+    queues[tier] = shuffle(tier_phrases.length ? tier_phrases : allPhrases);
+  }
   return queues[tier].pop();
 }
 
@@ -350,148 +381,183 @@ function show(id) {
   document.getElementById(id).classList.add('active');
 }
 
-// ─── Start ───────────────────────────────────────────────────
+// ─── Setup ───────────────────────────────────────────────────
 function startGame() {
   names[0] = document.getElementById('name1').value.trim() || 'Player 1';
   names[1] = document.getElementById('name2').value.trim() || 'Player 2';
   document.getElementById('pName1').textContent = names[0];
   document.getElementById('pName2').textContent = names[1];
   buildQueues();
-  turn = 0; scores = [0, 0]; roundNum = 0; chosenPts = 0;
-  show('game');
-  showPickPhase();
+  turn=0; scores=[0,0]; roundNum=0; chosenPts=0;
+  show('game'); showPickPhase();
 }
 
-// ─── Pick phase ──────────────────────────────────────────────
+// ─── Pick phase ───────────────────────────────────────────────
 function showPickPhase() {
   document.getElementById('pickPhase').style.display = '';
   document.getElementById('signPhase').style.display = 'none';
-  updateScoreboard();
-  updateProgress();
-  const banner = document.getElementById('turnBanner');
-  banner.textContent = `${names[turn]}'s turn — pick your difficulty!`;
-  banner.style.color = turn === 0 ? 'var(--p1)' : 'var(--p2)';
+  updateScoreboard(); updateProgress();
+  const b = document.getElementById('turnBanner');
+  b.textContent = `${names[turn]}'s turn — pick your difficulty!`;
+  b.style.color = turn===0 ? 'var(--p1)' : 'var(--p2)';
 }
 
 function pickPoints(pts) {
-  chosenPts   = pts;
+  chosenPts = pts;
   currentCard = drawPhrase(pts);
 
-  // Set video
-  document.getElementById('videoFrame').src =
-    `https://www.youtube.com/embed/${currentCard.videoId}?autoplay=1&rel=0`;
-
-  // Set pts chip color
   const chip = document.getElementById('ptsChip');
-  chip.textContent = `${pts} pt${pts > 1 ? 's' : ''} · ${ptLabels[pts]}`;
-  chip.style.background = ptColors[pts] + '22';
-  chip.style.color = ptColors[pts];
-  chip.style.border = `1px solid ${ptColors[pts]}55`;
+  chip.textContent = `${pts} pt${pts>1?'s':''} · ${ptLabels[pts]}`;
+  chip.style.cssText = `background:${ptColors[pts]}22;color:${ptColors[pts]};border:1px solid ${ptColors[pts]}55`;
 
-  // Hide answer + result row until reveal
+  // Video
+  const wrap = document.getElementById('videoWrap');
+  wrap.innerHTML = '';
+  if (currentCard.video) {
+    const vid = document.createElement('video');
+    vid.src = currentCard.video;
+    vid.controls = true;
+    vid.autoplay = true;
+    vid.loop = true;
+    vid.playsInline = true;
+    wrap.appendChild(vid);
+  } else {
+    wrap.innerHTML = '<div class="video-placeholder-msg">📹 Video coming soon</div>';
+  }
+
   document.getElementById('answerBox').classList.remove('shown');
   document.getElementById('resultRow').classList.remove('shown');
   document.getElementById('revealBtn').style.display = '';
-
   document.getElementById('pickPhase').style.display = 'none';
   document.getElementById('signPhase').style.display = '';
 
-  const banner = document.getElementById('turnBanner');
-  banner.textContent = `${names[turn]} — watch, then sign it!`;
-  banner.style.color = turn === 0 ? 'var(--p1)' : 'var(--p2)';
+  const b = document.getElementById('turnBanner');
+  b.textContent = `${names[turn]} — watch, then sign it!`;
+  b.style.color = turn===0 ? 'var(--p1)' : 'var(--p2)';
 }
 
-// ─── Reveal answer ───────────────────────────────────────────
 function revealAnswer() {
-  document.getElementById('answerText').textContent     = currentCard.text;
+  document.getElementById('answerText').textContent = currentCard.text;
   document.getElementById('answerCategory').textContent = currentCard.category;
   document.getElementById('answerBox').classList.add('shown');
   document.getElementById('resultRow').classList.add('shown');
   document.getElementById('revealBtn').style.display = 'none';
 }
 
-// ─── Grade ───────────────────────────────────────────────────
 function result(nailed) {
-  // Stop video
-  document.getElementById('videoFrame').src = '';
-  if (nailed) {
-    scores[turn] += chosenPts;
-    spawnPointPop(`+${chosenPts}`, turn);
-  }
+  if (nailed) { scores[turn] += chosenPts; spawnPointPop(`+${chosenPts}`, turn); }
   nextTurn();
 }
 
-function skipTurn() {
-  document.getElementById('videoFrame').src = '';
-  nextTurn();
-}
+function skipTurn() { nextTurn(); }
 
 function nextTurn() {
   roundNum++;
   if (roundNum >= totalRounds) { showWinner(); return; }
-  turn = 1 - turn;
-  showPickPhase();
+  turn = 1 - turn; showPickPhase();
 }
 
-// ─── UI helpers ──────────────────────────────────────────────
 function updateScoreboard() {
   document.getElementById('pScore1').textContent = scores[0];
   document.getElementById('pScore2').textContent = scores[1];
-  document.getElementById('scoreCard1').classList.toggle('active-turn', turn === 0);
-  document.getElementById('scoreCard2').classList.toggle('active-turn', turn === 1);
+  document.getElementById('scoreCard1').classList.toggle('active-turn', turn===0);
+  document.getElementById('scoreCard2').classList.toggle('active-turn', turn===1);
 }
 
 function updateProgress() {
-  document.getElementById('progressFill').style.width = (roundNum / totalRounds * 100) + '%';
-  document.getElementById('progressLabel').textContent = `Round ${roundNum + 1} of ${totalRounds}`;
+  document.getElementById('progressFill').style.width = (roundNum/totalRounds*100)+'%';
+  document.getElementById('progressLabel').textContent = `Round ${roundNum+1} of ${totalRounds}`;
 }
 
 function spawnPointPop(text, playerIdx) {
-  const card = document.getElementById('scoreCard' + (playerIdx + 1));
+  const card = document.getElementById('scoreCard'+(playerIdx+1));
   const rect = card.getBoundingClientRect();
-  const el   = document.createElement('div');
-  el.className   = 'point-pop';
-  el.textContent = text;
-  el.style.left  = (rect.left + rect.width / 2 - 24) + 'px';
-  el.style.top   = (rect.top + window.scrollY) + 'px';
-  el.style.color = playerIdx === 0 ? 'var(--p1)' : 'var(--p2)';
+  const el = document.createElement('div');
+  el.className='point-pop'; el.textContent=text;
+  el.style.left=(rect.left+rect.width/2-24)+'px';
+  el.style.top=(rect.top+window.scrollY)+'px';
+  el.style.color=playerIdx===0?'var(--p1)':'var(--p2)';
   document.body.appendChild(el);
-  setTimeout(() => el.remove(), 1000);
+  setTimeout(()=>el.remove(),1000);
 }
 
-// ─── Winner ──────────────────────────────────────────────────
 function showWinner() {
-  document.getElementById('finalName1').textContent = names[0];
-  document.getElementById('finalName2').textContent = names[1];
-  document.getElementById('finalPts1').textContent  = scores[0];
-  document.getElementById('finalPts2').textContent  = scores[1];
-  let emoji, title, sub;
-  if (scores[0] > scores[1]) {
-    emoji = '🏆'; title = `${names[0]} wins!`; sub = `${scores[0]} to ${scores[1]} — awesome signing!`;
-    document.getElementById('finalBox1').classList.add('winner-box');
-  } else if (scores[1] > scores[0]) {
-    emoji = '🏆'; title = `${names[1]} wins!`; sub = `${scores[1]} to ${scores[0]} — awesome signing!`;
-    document.getElementById('finalBox2').classList.add('winner-box');
-  } else {
-    emoji = '🤝'; title = "It's a tie!"; sub = `Both scored ${scores[0]} points — great game!`;
-  }
-  document.getElementById('winnerEmoji').textContent = emoji;
-  document.getElementById('winnerTitle').textContent = title;
-  document.getElementById('winnerSub').textContent   = sub;
+  document.getElementById('finalName1').textContent=names[0];
+  document.getElementById('finalName2').textContent=names[1];
+  document.getElementById('finalPts1').textContent=scores[0];
+  document.getElementById('finalPts2').textContent=scores[1];
+  let emoji,title,sub;
+  if (scores[0]>scores[1]) { emoji='🏆';title=`${names[0]} wins!`;sub=`${scores[0]} to ${scores[1]} — awesome signing!`;document.getElementById('finalBox1').classList.add('winner-box'); }
+  else if (scores[1]>scores[0]) { emoji='🏆';title=`${names[1]} wins!`;sub=`${scores[1]} to ${scores[0]} — awesome signing!`;document.getElementById('finalBox2').classList.add('winner-box'); }
+  else { emoji='🤝';title="It's a tie!";sub=`Both scored ${scores[0]} points — great game!`; }
+  document.getElementById('winnerEmoji').textContent=emoji;
+  document.getElementById('winnerTitle').textContent=title;
+  document.getElementById('winnerSub').textContent=sub;
   show('winner');
 }
 
 function playAgain() {
   document.getElementById('finalBox1').classList.remove('winner-box');
   document.getElementById('finalBox2').classList.remove('winner-box');
-  buildQueues();
-  turn = 0; scores = [0, 0]; roundNum = 0; chosenPts = 0;
-  show('game');
-  showPickPhase();
+  buildQueues(); turn=0; scores=[0,0]; roundNum=0; chosenPts=0;
+  show('game'); showPickPhase();
 }
 
-document.getElementById('name1').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('name2').focus(); });
-document.getElementById('name2').addEventListener('keydown', e => { if (e.key === 'Enter') startGame(); });
+// ─── Manage screen ────────────────────────────────────────────
+function renderManage() {
+  const wrap = document.getElementById('phraseListWrap');
+  wrap.innerHTML = '';
+  for (let t=1; t<=5; t++) {
+    const section = document.createElement('div');
+    section.className = 'tier-section';
+    const tierPhrases = allPhrases.filter(p => p.tier===t);
+    const label = ['','Easy','Medium','Hard','Expert','Champ'][t];
+    section.innerHTML = `<div class="tier-label">Tier ${t} — ${label} (${tierPhrases.length} phrases)</div>`;
+    if (!tierPhrases.length) {
+      section.innerHTML += '<div class="empty-tier">No phrases in this tier yet.</div>';
+    } else {
+      tierPhrases.forEach(p => {
+        const idx = allPhrases.indexOf(p);
+        const item = document.createElement('div');
+        item.className = 'phrase-item';
+        item.innerHTML = `
+          <div style="flex:1">
+            <div class="phrase-item-text">${p.text}</div>
+            <div style="display:flex;gap:8px;margin-top:3px">
+              <span class="phrase-item-cat">${p.category}</span>
+              <span class="phrase-item-video">${p.video ? '📹 '+p.video : '📹 no video yet'}</span>
+            </div>
+          </div>
+          <button class="delete-btn" onclick="deletePhrase(${idx})">Delete</button>`;
+        section.appendChild(item);
+      });
+    }
+    wrap.appendChild(section);
+  }
+}
+
+function addPhrase() {
+  const text = document.getElementById('newPhrase').value.trim();
+  const category = document.getElementById('newCategory').value.trim() || 'General';
+  const tier = parseInt(document.getElementById('newTier').value);
+  if (!text) { alert('Please enter a phrase.'); return; }
+  allPhrases.push({ text, category, tier, video: '' });
+  savePhrases();
+  document.getElementById('newPhrase').value = '';
+  document.getElementById('newCategory').value = '';
+  renderManage();
+}
+
+function deletePhrase(idx) {
+  if (!confirm(`Delete "${allPhrases[idx].text}"?`)) return;
+  allPhrases.splice(idx, 1);
+  savePhrases();
+  renderManage();
+}
+
+// Enter key setup
+document.getElementById('name1').addEventListener('keydown', e => { if(e.key==='Enter') document.getElementById('name2').focus(); });
+document.getElementById('name2').addEventListener('keydown', e => { if(e.key==='Enter') startGame(); });
 </script>
 </body>
 </html>
