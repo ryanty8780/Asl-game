@@ -136,23 +136,7 @@
   .record-btn.has-video { background:rgba(107,203,119,.2); border-color:rgba(107,203,119,.4); color:#6bcb77; }
   .delete-btn { background:rgba(242,95,92,.15); border:1px solid rgba(242,95,92,.25); color:#f25f5c; border-radius:8px; padding:6px 10px; font-family:'Nunito',sans-serif; font-size:.72rem; font-weight:800; cursor:pointer; }
   .delete-btn:hover { background:rgba(242,95,92,.3); }
-
-  /* Recording modal */
-  .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,.85); z-index:200; display:flex; align-items:flex-start; justify-content:center; padding:20px; overflow-y:auto; }
-  .modal-overlay.hidden { display:none; }
-  .modal-box { background:var(--card); border-radius:20px; padding:24px; width:100%; max-width:420px; display:flex; flex-direction:column; gap:14px; border:2px solid var(--bdr); margin:auto; }
-  .modal-phrase { font-family:'Nunito',sans-serif; font-size:1.2rem; font-weight:800; color:var(--white); text-align:center; line-height:1.3; }
-  .modal-sub { font-size:.78rem; color:var(--muted); text-align:center; }
-  #cameraPreview { width:100%; height:220px; border-radius:12px; background:#000; object-fit:cover; }
-  .modal-btn-row { display:flex; flex-direction:column; gap:10px; }
-  .modal-btn { width:100%; padding:16px; border:none; border-radius:12px; font-family:'Nunito',sans-serif; font-size:1rem; font-weight:900; cursor:pointer; }
-  .btn-record-start { background:#f25f5c; color:#fff; }
-  .btn-record-stop  { background:#6bcb77; color:#0f2010; display:none; }
-  .btn-save-video   { background:var(--p1); color:#1a1a1a; display:none; }
-  .btn-cancel-modal { background:rgba(255,255,255,.08); color:rgba(255,255,255,.6); border:1px solid rgba(255,255,255,.1); }
-  .recording-dot { display:inline-block; width:8px; height:8px; border-radius:50%; background:#f25f5c; margin-right:6px; animation:blink 1s infinite; }
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-  .modal-status { font-size:.78rem; color:var(--muted); text-align:center; min-height:18px; }
+  .hidden-file-input { display:none; }
 
   .back-btn { width:100%; padding:13px; border:1px solid rgba(255,255,255,.1); border-radius:12px; background:transparent; color:rgba(255,255,255,.5); font-family:'Nunito',sans-serif; font-size:.9rem; font-weight:800; cursor:pointer; }
   .back-btn:hover { background:rgba(255,255,255,.05); color:var(--white); }
@@ -233,7 +217,7 @@
 <!-- Manage -->
 <div id="manage" class="screen">
   <div class="manage-title">⚙️ Manage <span>Phrases</span></div>
-  <p class="manage-note">Tap <strong>Record</strong> next to any phrase to record a short video using your camera. It saves automatically.</p>
+  <p class="manage-note">Tap <strong>Upload Video</strong> next to any phrase to pick a video from your camera roll. It saves automatically.</p>
   <div class="add-form">
     <div class="add-form-title">Add a new phrase</div>
     <input class="form-input" id="newPhrase" type="text" placeholder="Type the phrase…"/>
@@ -253,21 +237,8 @@
   <button class="back-btn" onclick="show('setup')">← Back to game</button>
 </div>
 
-<!-- Recording modal -->
-<div class="modal-overlay hidden" id="recordModal">
-  <div class="modal-box">
-    <div class="modal-phrase" id="modalPhrase"></div>
-    <div class="modal-sub">Record yourself signing this phrase</div>
-    <video id="cameraPreview" autoplay muted playsinline></video>
-    <div class="modal-status" id="modalStatus"></div>
-    <div class="modal-btn-row">
-      <button class="modal-btn btn-record-start" id="btnStart" onclick="startRecording()">⏺ Record</button>
-      <button class="modal-btn btn-record-stop"  id="btnStop"  onclick="stopRecording()">⏹ Stop</button>
-      <button class="modal-btn btn-save-video"   id="btnSave"  onclick="saveRecording()">✓ Save</button>
-    </div>
-    <button class="modal-btn btn-cancel-modal" onclick="closeModal()">Cancel</button>
-  </div>
-</div>
+<!-- Hidden file input for video upload -->
+<input type="file" accept="video/*" id="videoFileInput" class="hidden-file-input" onchange="handleVideoUpload(event)"/>
 
 <script>
 // ─── Default phrases ──────────────────────────────────────────
@@ -493,7 +464,7 @@ function renderManage() {
               <div class="phrase-item-cat">${p.category}</div>
             </div>
             <div class="phrase-item-actions">
-              <button class="record-btn ${hasVid?'has-video':''}" onclick="openModal(${idx})">${hasVid?'✓ Re-record':'⏺ Record'}</button>
+              <button class="record-btn ${hasVid?'has-video':''}" onclick="triggerUpload(${idx})">${hasVid?'✓ Re-upload':'📹 Upload Video'}</button>
               <button class="delete-btn" onclick="deletePhrase(${idx})">Delete</button>
             </div>
           </div>`;
@@ -520,68 +491,29 @@ function deletePhrase(idx) {
   allPhrases.splice(idx,1); savePhrases(); renderManage();
 }
 
-// ─── Recording ───────────────────────────────────────────────
-let recordingIdx=null, mediaStream=null, mediaRecorder=null, recordedChunks=[];
+// ─── Upload video ─────────────────────────────────────────────
+let uploadingIdx = null;
 
-async function openModal(idx) {
-  recordingIdx=idx;
-  recordedChunks=[]; mediaRecorder=null;
-  document.getElementById('modalPhrase').textContent=allPhrases[idx].text;
-  document.getElementById('modalStatus').textContent='';
-  document.getElementById('btnStart').style.display='';
-  document.getElementById('btnStop').style.display='none';
-  document.getElementById('btnSave').style.display='none';
-  document.getElementById('recordModal').classList.remove('hidden');
-  try {
-    mediaStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user'},audio:false});
-    document.getElementById('cameraPreview').srcObject=mediaStream;
-  } catch(e) {
-    document.getElementById('modalStatus').textContent='Camera access denied. Please allow camera in your browser settings.';
-  }
+function triggerUpload(idx) {
+  uploadingIdx = idx;
+  const input = document.getElementById('videoFileInput');
+  input.value = ''; // reset so same file can be re-selected
+  input.click();
 }
 
-function startRecording() {
-  if(!mediaStream){alert('No camera available.');return;}
-  recordedChunks=[];
-  const opts=MediaRecorder.isTypeSupported('video/webm;codecs=vp9')?{mimeType:'video/webm;codecs=vp9'}:
-              MediaRecorder.isTypeSupported('video/webm')?{mimeType:'video/webm'}:{};
-  mediaRecorder=new MediaRecorder(mediaStream,opts);
-  mediaRecorder.ondataavailable=e=>{ if(e.data.size>0) recordedChunks.push(e.data); };
-  mediaRecorder.onstop=()=>{
-    document.getElementById('btnSave').style.display='';
-    document.getElementById('modalStatus').textContent='✓ Recording saved — tap Save to keep it.';
+function handleVideoUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      saveVideo(allPhrases[uploadingIdx].text, reader.result);
+      renderManage();
+    } catch(e) {
+      alert('Video too large to save. Try a shorter clip (under 10 seconds).');
+    }
   };
-  mediaRecorder.start(100);
-  document.getElementById('btnStart').style.display='none';
-  document.getElementById('btnStop').style.display='block';
-  document.getElementById('btnSave').style.display='none';
-  document.getElementById('modalStatus').innerHTML='<span class="recording-dot"></span>Recording… tap Stop when done';
-}
-
-function stopRecording() {
-  if(mediaRecorder&&mediaRecorder.state!=='inactive') mediaRecorder.stop();
-  document.getElementById('btnStop').style.display='none';
-  document.getElementById('btnSave').style.display='block';
-  document.getElementById('modalStatus').textContent='✓ Done — tap Save to keep it.';
-}
-
-function saveRecording() {
-  if(!recordedChunks.length){alert('No recording found.');return;}
-  const blob=new Blob(recordedChunks,{type:recordedChunks[0].type||'video/webm'});
-  const reader=new FileReader();
-  reader.onload=()=>{
-    saveVideo(allPhrases[recordingIdx].text, reader.result);
-    document.getElementById('modalStatus').textContent='✅ Video saved!';
-    setTimeout(()=>{ closeModal(); renderManage(); },800);
-  };
-  reader.readAsDataURL(blob);
-}
-
-function closeModal() {
-  document.getElementById('recordModal').classList.add('hidden');
-  if(mediaStream){ mediaStream.getTracks().forEach(t=>t.stop()); mediaStream=null; }
-  if(mediaRecorder&&mediaRecorder.state!=='inactive') mediaRecorder.stop();
-  document.getElementById('cameraPreview').srcObject=null;
+  reader.readAsDataURL(file);
 }
 
 // ─── Init ─────────────────────────────────────────────────────
