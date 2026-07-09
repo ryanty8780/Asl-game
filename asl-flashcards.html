@@ -551,10 +551,11 @@ function startRecording() {
     document.getElementById('btnSave').style.display='';
     document.getElementById('modalStatus').textContent='✓ Recording saved — tap Save to keep it.';
   };
-  mediaRecorder.start();
+  mediaRecorder.start(100);
   document.getElementById('btnStart').style.display='none';
-  document.getElementById('btnStop').style.display='';
-  document.getElementById('modalStatus').innerHTML='<span class="recording-dot"></span>Recording…';
+  document.getElementById('btnStop').style.display='block';
+  document.getElementById('btnSave').style.display='none';
+  document.getElementById('modalStatus').innerHTML='<span class="recording-dot"></span>Recording… tap Stop when done';
 }
 
 function stopRecording() {
