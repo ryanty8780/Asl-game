@@ -6,22 +6,22 @@
 <title>ASL Sign Game</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
   :root {
-    --bg:   #0f1b2d; --card: #1a2e47; --bdr: rgba(255,255,255,0.07);
-    --p1:   #f7c948; --p2:  #4ecdc4;
-    --c1:   #4a90d9; --c2:  #6bcb77; --c3: #f7c948; --c4: #f7a54a; --c5: #f25f5c;
+    --bg:#0f1b2d; --card:#1a2e47; --bdr:rgba(255,255,255,0.07);
+    --p1:#f7c948; --p2:#4ecdc4;
+    --c1:#4a90d9; --c2:#6bcb77; --c3:#f7c948; --c4:#f7a54a; --c5:#f25f5c;
     --white:#ffffff; --muted:rgba(255,255,255,0.4);
   }
   body { font-family:'Nunito Sans',sans-serif; background:var(--bg); min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:24px 16px 60px; color:var(--white); }
   .screen { display:none; flex-direction:column; align-items:center; width:100%; }
   .screen.active { display:flex; }
 
-  /* ── Setup ── */
+  /* Setup */
   #setup { max-width:400px; gap:24px; padding-top:40px; }
   .setup-title { font-family:'Nunito',sans-serif; font-size:2.4rem; font-weight:900; text-align:center; line-height:1.1; }
   .setup-title span { color:var(--p1); }
-  .setup-sub { font-size:0.88rem; color:var(--muted); text-align:center; margin-top:-12px; }
+  .setup-sub { font-size:.88rem; color:var(--muted); text-align:center; margin-top:-12px; }
   .name-group { width:100%; display:flex; flex-direction:column; gap:12px; }
   .name-wrap { display:flex; align-items:center; gap:10px; background:var(--card); border:2px solid var(--bdr); border-radius:14px; padding:10px 16px; }
   .name-wrap.p1 { border-left:4px solid var(--p1); }
@@ -34,10 +34,10 @@
   .setup-btn-row { width:100%; display:flex; flex-direction:column; gap:10px; }
   .start-btn { width:100%; padding:16px; border:none; border-radius:14px; background:var(--p1); color:#1a1a1a; font-family:'Nunito',sans-serif; font-size:1.1rem; font-weight:900; cursor:pointer; transition:transform .15s,filter .15s; }
   .start-btn:hover { transform:translateY(-2px); filter:brightness(1.08); }
-  .manage-link { text-align:center; font-size:0.82rem; color:var(--muted); cursor:pointer; text-decoration:underline; }
+  .manage-link { text-align:center; font-size:.82rem; color:var(--muted); cursor:pointer; text-decoration:underline; }
   .manage-link:hover { color:var(--white); }
 
-  /* ── Game ── */
+  /* Game */
   #game { max-width:540px; }
   .scoreboard { display:grid; grid-template-columns:1fr 1fr; gap:10px; width:100%; margin-bottom:16px; }
   .player-score { background:var(--card); border-radius:14px; padding:14px 16px; text-align:center; border:2px solid var(--bdr); transition:border-color .3s,box-shadow .3s; position:relative; overflow:hidden; }
@@ -73,13 +73,10 @@
   .phrase-card-header { display:flex; align-items:center; justify-content:space-between; padding:14px 18px 10px; }
   .phrase-card-title { font-family:'Nunito',sans-serif; font-size:.78rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
   .pts-chip { font-family:'Nunito',sans-serif; font-size:.75rem; font-weight:900; padding:3px 10px; border-radius:20px; }
-
-  /* Video area */
-  .video-wrap { width:100%; aspect-ratio:16/9; background:#000; position:relative; display:flex; align-items:center; justify-content:center; }
-  .video-wrap video { width:100%; height:100%; object-fit:cover; display:block; }
+  .video-wrap { width:100%; aspect-ratio:16/9; background:#000; display:flex; align-items:center; justify-content:center; }
+  .video-wrap video { width:100%; height:100%; object-fit:cover; }
   .video-placeholder-msg { font-family:'Nunito',sans-serif; font-size:.8rem; font-weight:700; color:rgba(255,255,255,.3); text-align:center; padding:20px; }
-
-  .reveal-btn { width:100%; padding:16px; border:1px solid rgba(255,255,255,.12); border-radius:14px; background:rgba(255,255,255,.08); color:var(--white); font-family:'Nunito',sans-serif; font-size:1rem; font-weight:900; cursor:pointer; margin-bottom:12px; transition:background .2s; }
+  .reveal-btn { width:100%; padding:16px; border:1px solid rgba(255,255,255,.12); border-radius:14px; background:rgba(255,255,255,.08); color:var(--white); font-family:'Nunito',sans-serif; font-size:1rem; font-weight:900; cursor:pointer; margin-bottom:12px; }
   .reveal-btn:hover { background:rgba(255,255,255,.13); }
   .answer-box { width:100%; background:var(--card); border-radius:16px; padding:20px 22px; margin-bottom:12px; border:2px solid var(--bdr); text-align:center; display:none; }
   .answer-box.shown { display:block; }
@@ -92,7 +89,7 @@
   .result-btn:hover { transform:translateY(-2px); filter:brightness(1.1); }
   .btn-nailed { background:#6bcb77; color:#0f2010; }
   .btn-missed { background:rgba(255,255,255,.07); color:rgba(255,255,255,.55); border:1px solid rgba(255,255,255,.1); }
-  .skip-btn { width:100%; padding:11px; border:1px solid rgba(255,255,255,.08); border-radius:12px; background:transparent; color:var(--muted); font-family:'Nunito Sans',sans-serif; font-size:.82rem; font-weight:600; cursor:pointer; transition:background .15s,color .15s; }
+  .skip-btn { width:100%; padding:11px; border:1px solid rgba(255,255,255,.08); border-radius:12px; background:transparent; color:var(--muted); font-family:'Nunito Sans',sans-serif; font-size:.82rem; font-weight:600; cursor:pointer; }
   .skip-btn:hover { background:rgba(255,255,255,.05); color:var(--white); }
 
   /* Point pop */
@@ -110,39 +107,55 @@
   .final-score-box.p1 { color:var(--p1); } .final-score-box.p2 { color:var(--p2); }
   .final-name { font-family:'Nunito',sans-serif; font-size:.8rem; font-weight:800; opacity:.7; text-transform:uppercase; letter-spacing:.06em; margin-bottom:6px; }
   .final-pts { font-family:'Nunito',sans-serif; font-size:2.8rem; font-weight:900; line-height:1; }
-  .play-again-btn { width:100%; padding:16px; border:none; border-radius:14px; background:var(--p1); color:#1a1a1a; font-family:'Nunito',sans-serif; font-size:1.1rem; font-weight:900; cursor:pointer; transition:transform .15s,filter .15s; }
-  .play-again-btn:hover { transform:translateY(-2px); filter:brightness(1.08); }
+  .play-again-btn { width:100%; padding:16px; border:none; border-radius:14px; background:var(--p1); color:#1a1a1a; font-family:'Nunito',sans-serif; font-size:1.1rem; font-weight:900; cursor:pointer; }
+  .play-again-btn:hover { filter:brightness(1.08); }
 
-  /* ── Manage screen ── */
+  /* Manage */
   #manage { max-width:560px; gap:20px; padding-top:20px; }
   .manage-title { font-family:'Nunito',sans-serif; font-size:1.6rem; font-weight:900; text-align:center; }
   .manage-title span { color:var(--p1); }
-  .manage-note { font-size:0.8rem; color:var(--muted); text-align:center; margin-top:-10px; line-height:1.5; }
-
-  /* Add form */
+  .manage-note { font-size:.8rem; color:var(--muted); text-align:center; margin-top:-10px; line-height:1.5; }
   .add-form { width:100%; background:var(--card); border-radius:16px; padding:18px; border:2px solid var(--bdr); display:flex; flex-direction:column; gap:10px; }
   .add-form-title { font-family:'Nunito',sans-serif; font-size:.75rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
-  .form-row { display:flex; gap:8px; }
-  .form-input { flex:1; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12); border-radius:10px; padding:10px 12px; font-family:'Nunito Sans',sans-serif; font-size:.9rem; color:var(--white); outline:none; }
+  .form-row { display:flex; gap:8px; flex-wrap:wrap; }
+  .form-input { flex:1; min-width:120px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12); border-radius:10px; padding:10px 12px; font-family:'Nunito Sans',sans-serif; font-size:.9rem; color:var(--white); outline:none; }
   .form-input::placeholder { color:var(--muted); }
-  .form-input:focus { border-color:rgba(255,255,255,.3); }
   .form-select { background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12); border-radius:10px; padding:10px 12px; font-family:'Nunito Sans',sans-serif; font-size:.9rem; color:var(--white); outline:none; cursor:pointer; }
   .form-select option { background:#1a2e47; }
-  .add-btn { padding:11px 18px; border:none; border-radius:10px; background:var(--p1); color:#1a1a1a; font-family:'Nunito',sans-serif; font-size:.9rem; font-weight:900; cursor:pointer; white-space:nowrap; }
+  .add-btn { padding:11px 18px; border:none; border-radius:10px; background:var(--p1); color:#1a1a1a; font-family:'Nunito',sans-serif; font-size:.9rem; font-weight:900; cursor:pointer; }
 
-  /* Phrase list */
   .phrase-list-wrap { width:100%; }
   .tier-section { margin-bottom:20px; }
   .tier-label { font-family:'Nunito',sans-serif; font-size:.72rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; padding-left:4px; }
-  .phrase-item { display:flex; align-items:center; gap:10px; background:var(--card); border-radius:12px; padding:12px 14px; margin-bottom:6px; border:1px solid var(--bdr); }
+  .phrase-item { background:var(--card); border-radius:12px; padding:12px 14px; margin-bottom:8px; border:1px solid var(--bdr); }
+  .phrase-item-top { display:flex; align-items:center; gap:8px; }
   .phrase-item-text { flex:1; font-size:.9rem; font-weight:600; color:var(--white); line-height:1.3; }
-  .phrase-item-cat { font-size:.68rem; font-weight:700; color:var(--muted); letter-spacing:.06em; text-transform:uppercase; white-space:nowrap; }
-  .phrase-item-video { font-size:.68rem; color:rgba(255,255,255,.25); margin-top:2px; }
-  .delete-btn { background:rgba(242,95,92,.15); border:1px solid rgba(242,95,92,.25); color:#f25f5c; border-radius:8px; padding:5px 10px; font-family:'Nunito',sans-serif; font-size:.75rem; font-weight:800; cursor:pointer; white-space:nowrap; transition:background .15s; }
+  .phrase-item-cat { font-size:.65rem; font-weight:700; color:var(--muted); letter-spacing:.06em; text-transform:uppercase; }
+  .phrase-item-actions { display:flex; gap:6px; align-items:center; flex-shrink:0; }
+  .record-btn { background:rgba(74,144,217,.2); border:1px solid rgba(74,144,217,.4); color:#7db8e8; border-radius:8px; padding:6px 10px; font-family:'Nunito',sans-serif; font-size:.72rem; font-weight:800; cursor:pointer; white-space:nowrap; }
+  .record-btn.has-video { background:rgba(107,203,119,.2); border-color:rgba(107,203,119,.4); color:#6bcb77; }
+  .delete-btn { background:rgba(242,95,92,.15); border:1px solid rgba(242,95,92,.25); color:#f25f5c; border-radius:8px; padding:6px 10px; font-family:'Nunito',sans-serif; font-size:.72rem; font-weight:800; cursor:pointer; }
   .delete-btn:hover { background:rgba(242,95,92,.3); }
+
+  /* Recording modal */
+  .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,.85); z-index:200; display:flex; align-items:center; justify-content:center; padding:20px; }
+  .modal-overlay.hidden { display:none; }
+  .modal-box { background:var(--card); border-radius:20px; padding:24px; width:100%; max-width:420px; display:flex; flex-direction:column; gap:14px; border:2px solid var(--bdr); }
+  .modal-phrase { font-family:'Nunito',sans-serif; font-size:1.2rem; font-weight:800; color:var(--white); text-align:center; line-height:1.3; }
+  .modal-sub { font-size:.78rem; color:var(--muted); text-align:center; }
+  #cameraPreview { width:100%; aspect-ratio:16/9; border-radius:12px; background:#000; object-fit:cover; }
+  .modal-btn-row { display:flex; gap:10px; }
+  .modal-btn { flex:1; padding:14px; border:none; border-radius:12px; font-family:'Nunito',sans-serif; font-size:.9rem; font-weight:900; cursor:pointer; }
+  .btn-record-start { background:#f25f5c; color:#fff; }
+  .btn-record-stop  { background:#6bcb77; color:#0f2010; display:none; }
+  .btn-save-video   { background:var(--p1); color:#1a1a1a; display:none; }
+  .btn-cancel-modal { background:rgba(255,255,255,.08); color:rgba(255,255,255,.6); border:1px solid rgba(255,255,255,.1); }
+  .recording-dot { display:inline-block; width:8px; height:8px; border-radius:50%; background:#f25f5c; margin-right:6px; animation:blink 1s infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+  .modal-status { font-size:.78rem; color:var(--muted); text-align:center; min-height:18px; }
+
   .back-btn { width:100%; padding:13px; border:1px solid rgba(255,255,255,.1); border-radius:12px; background:transparent; color:rgba(255,255,255,.5); font-family:'Nunito',sans-serif; font-size:.9rem; font-weight:800; cursor:pointer; }
   .back-btn:hover { background:rgba(255,255,255,.05); color:var(--white); }
-
   .empty-tier { font-size:.82rem; color:rgba(255,255,255,.2); padding:8px 4px; font-style:italic; }
 </style>
 </head>
@@ -158,7 +171,7 @@
   </div>
   <div class="setup-btn-row">
     <button class="start-btn" onclick="startGame()">Let's play! 🤟</button>
-    <span class="manage-link" onclick="show('manage');renderManage()">⚙️ Manage phrases</span>
+    <span class="manage-link" onclick="show('manage');renderManage()">⚙️ Manage phrases &amp; record videos</span>
   </div>
 </div>
 
@@ -173,8 +186,6 @@
     <span class="progress-label" id="progressLabel"></span>
   </div>
   <div class="turn-banner" id="turnBanner"></div>
-
-  <!-- Pick -->
   <div id="pickPhase">
     <div class="pick-label">Choose your difficulty 👇</div>
     <div class="pt-pick-row">
@@ -185,19 +196,15 @@
       <button class="pt-pick-btn" data-pts="5" onclick="pickPoints(5)">5<span class="pt-sub">Champ</span></button>
     </div>
   </div>
-
-  <!-- Sign -->
   <div id="signPhase" style="display:none;">
     <div class="phrase-card">
       <div class="phrase-card-header">
         <span class="phrase-card-title">Watch &amp; Sign</span>
         <span class="pts-chip" id="ptsChip"></span>
       </div>
-      <div class="video-wrap" id="videoWrap">
-        <div class="video-placeholder-msg" id="videoPlaceholder">📹 Video coming soon</div>
-      </div>
+      <div class="video-wrap" id="videoWrap"></div>
     </div>
-    <button class="reveal-btn" id="revealBtn" onclick="revealAnswer()">👀 Reveal Answer</button>
+    <button class="reveal-btn" onclick="revealAnswer()">👀 Reveal Answer</button>
     <div class="answer-box" id="answerBox">
       <div class="answer-eyebrow">The phrase was…</div>
       <div class="answer-text" id="answerText"></div>
@@ -226,13 +233,12 @@
 <!-- Manage -->
 <div id="manage" class="screen">
   <div class="manage-title">⚙️ Manage <span>Phrases</span></div>
-  <p class="manage-note">Add your own phrases and assign a difficulty. When you record a video, name the file exactly as shown and place it in the same folder as this HTML file.</p>
-
+  <p class="manage-note">Tap <strong>Record</strong> next to any phrase to record a short video using your camera. It saves automatically.</p>
   <div class="add-form">
     <div class="add-form-title">Add a new phrase</div>
-    <input class="form-input" id="newPhrase" type="text" placeholder="Type the phrase…" />
+    <input class="form-input" id="newPhrase" type="text" placeholder="Type the phrase…"/>
     <div class="form-row">
-      <input class="form-input" id="newCategory" type="text" placeholder="Category (e.g. Greetings)" style="flex:1"/>
+      <input class="form-input" id="newCategory" type="text" placeholder="Category (e.g. Greetings)"/>
       <select class="form-select" id="newTier">
         <option value="1">1 — Easy</option>
         <option value="2">2 — Medium</option>
@@ -243,259 +249,221 @@
       <button class="add-btn" onclick="addPhrase()">Add</button>
     </div>
   </div>
-
   <div class="phrase-list-wrap" id="phraseListWrap"></div>
   <button class="back-btn" onclick="show('setup')">← Back to game</button>
 </div>
 
+<!-- Recording modal -->
+<div class="modal-overlay hidden" id="recordModal">
+  <div class="modal-box">
+    <div class="modal-phrase" id="modalPhrase"></div>
+    <div class="modal-sub">Record yourself signing this phrase</div>
+    <video id="cameraPreview" autoplay muted playsinline></video>
+    <div class="modal-status" id="modalStatus"></div>
+    <div class="modal-btn-row">
+      <button class="modal-btn btn-record-start" id="btnStart" onclick="startRecording()">⏺ Record</button>
+      <button class="modal-btn btn-record-stop"  id="btnStop"  onclick="stopRecording()">⏹ Stop</button>
+      <button class="modal-btn btn-save-video"   id="btnSave"  onclick="saveRecording()">✓ Save</button>
+    </div>
+    <button class="modal-btn btn-cancel-modal" onclick="closeModal()">Cancel</button>
+  </div>
+</div>
+
 <script>
-// ─── Default phrase bank ──────────────────────────────────────
-// video: filename of your recorded video (place in same folder as this file)
-// Leave video blank — fill in as you record them
+// ─── Default phrases ──────────────────────────────────────────
 const DEFAULT_PHRASES = [
-  // ── Tier 1: Easy — single words / very short ──
-  { text:"Hello!",            category:"Greetings",    tier:1, video:"" },
-  { text:"Goodbye.",          category:"Greetings",    tier:1, video:"" },
-  { text:"Please.",           category:"Basics",       tier:1, video:"" },
-  { text:"Thank you.",        category:"Basics",       tier:1, video:"" },
-  { text:"You're welcome.",   category:"Basics",       tier:1, video:"" },
-  { text:"Sorry.",            category:"Basics",       tier:1, video:"" },
-  { text:"Yes.",              category:"Basics",       tier:1, video:"" },
-  { text:"No.",               category:"Basics",       tier:1, video:"" },
-  { text:"Help!",             category:"Basics",       tier:1, video:"" },
-  { text:"I love you.",       category:"Feelings",     tier:1, video:"" },
-  { text:"More.",             category:"Basics",       tier:1, video:"" },
-  { text:"Stop.",             category:"Basics",       tier:1, video:"" },
-
-  // ── Tier 2: Medium — short sentences ──
-  { text:"How are you?",          category:"Greetings",  tier:2, video:"" },
-  { text:"I am happy.",           category:"Feelings",   tier:2, video:"" },
-  { text:"I am sad.",             category:"Feelings",   tier:2, video:"" },
-  { text:"I am tired.",           category:"Feelings",   tier:2, video:"" },
-  { text:"I am hungry.",          category:"Feelings",   tier:2, video:"" },
-  { text:"I am scared.",          category:"Feelings",   tier:2, video:"" },
-  { text:"Good morning.",         category:"Greetings",  tier:2, video:"" },
-  { text:"Good night.",           category:"Greetings",  tier:2, video:"" },
-  { text:"See you later.",        category:"Greetings",  tier:2, video:"" },
-  { text:"Nice to meet you.",     category:"Greetings",  tier:2, video:"" },
-  { text:"My name is ___.",       category:"Greetings",  tier:2, video:"" },
-  { text:"I don't know.",         category:"Basics",     tier:2, video:"" },
-  { text:"Can you help me?",      category:"Basics",     tier:2, video:"" },
-  { text:"I don't understand.",   category:"Basics",     tier:2, video:"" },
-  { text:"Wait a minute.",        category:"Basics",     tier:2, video:"" },
-  { text:"Come here.",            category:"Basics",     tier:2, video:"" },
-  { text:"Sit down.",             category:"Basics",     tier:2, video:"" },
-  { text:"Good job!",             category:"Basics",     tier:2, video:"" },
-  { text:"Be quiet.",             category:"Basics",     tier:2, video:"" },
-  { text:"I am fine.",            category:"Feelings",   tier:2, video:"" },
-
-  // ── Tier 3: Hard — medium sentences ──
-  { text:"What is your name?",       category:"Greetings",    tier:3, video:"" },
-  { text:"Where are you from?",      category:"Greetings",    tier:3, video:"" },
-  { text:"Where is the bathroom?",   category:"Places",       tier:3, video:"" },
-  { text:"I am learning ASL.",       category:"Basics",       tier:3, video:"" },
-  { text:"Please sign slower.",      category:"Basics",       tier:3, video:"" },
-  { text:"What time is it?",         category:"Time",         tier:3, video:"" },
-  { text:"What day is today?",       category:"Time",         tier:3, video:"" },
-  { text:"I am busy today.",         category:"Time",         tier:3, video:"" },
-  { text:"Do you have a dog?",       category:"Family",       tier:3, video:"" },
-  { text:"How old are you?",         category:"Basics",       tier:3, video:"" },
-  { text:"I live in Oklahoma.",      category:"Places",       tier:3, video:"" },
-  { text:"Are you okay?",            category:"Feelings",     tier:3, video:"" },
-  { text:"I need to go.",            category:"Basics",       tier:3, video:"" },
-  { text:"Let's go outside.",        category:"Basics",       tier:3, video:"" },
-  { text:"Do you want food?",        category:"Food",         tier:3, video:"" },
-
-  // ── Tier 4: Expert — longer sentences ──
-  { text:"Can you please sign slower?",    category:"Basics",  tier:4, video:"" },
-  { text:"What is your favorite color?",   category:"Basics",  tier:4, video:"" },
-  { text:"I have a brother and a sister.", category:"Family",  tier:4, video:"" },
-  { text:"Do you want to play outside?",   category:"Basics",  tier:4, video:"" },
-  { text:"What school do you go to?",      category:"School",  tier:4, video:"" },
-  { text:"Can I have some water please?",  category:"Basics",  tier:4, video:"" },
-  { text:"What do you want to eat?",       category:"Food",    tier:4, video:"" },
-  { text:"My mom is at the store.",        category:"Family",  tier:4, video:"" },
-  { text:"I like pizza and hamburgers.",   category:"Food",    tier:4, video:"" },
-  { text:"See you tomorrow at school.",    category:"School",  tier:4, video:"" },
-  { text:"I need help with my homework.",  category:"School",  tier:4, video:"" },
-  { text:"What is your favorite sport?",   category:"Basics",  tier:4, video:"" },
-
-  // ── Tier 5: Champ — complex sentences ──
-  { text:"What do you want to do today?",            category:"Basics",  tier:5, video:"" },
-  { text:"My favorite subject in school is math.",   category:"School",  tier:5, video:"" },
-  { text:"Can you show me how to sign that again?",  category:"Basics",  tier:5, video:"" },
-  { text:"I don't understand, can you repeat that?", category:"Basics",  tier:5, video:"" },
-  { text:"Where do you want to go for dinner?",      category:"Food",    tier:5, video:"" },
-  { text:"I have been learning ASL for a while.",    category:"Basics",  tier:5, video:"" },
-  { text:"My birthday is coming up really soon.",    category:"Family",  tier:5, video:"" },
-  { text:"We should practice signing every day.",    category:"Basics",  tier:5, video:"" },
-  { text:"What is your favorite movie or show?",     category:"Basics",  tier:5, video:"" },
-  { text:"I want to learn more signs every day.",    category:"Basics",  tier:5, video:"" },
+  { text:"Hello!",            category:"Greetings", tier:1 },
+  { text:"Goodbye.",          category:"Greetings", tier:1 },
+  { text:"Please.",           category:"Basics",    tier:1 },
+  { text:"Thank you.",        category:"Basics",    tier:1 },
+  { text:"You're welcome.",   category:"Basics",    tier:1 },
+  { text:"Sorry.",            category:"Basics",    tier:1 },
+  { text:"Yes.",              category:"Basics",    tier:1 },
+  { text:"No.",               category:"Basics",    tier:1 },
+  { text:"Help!",             category:"Basics",    tier:1 },
+  { text:"I love you.",       category:"Feelings",  tier:1 },
+  { text:"More.",             category:"Basics",    tier:1 },
+  { text:"Stop.",             category:"Basics",    tier:1 },
+  { text:"How are you?",          category:"Greetings", tier:2 },
+  { text:"I am happy.",           category:"Feelings",  tier:2 },
+  { text:"I am sad.",             category:"Feelings",  tier:2 },
+  { text:"I am tired.",           category:"Feelings",  tier:2 },
+  { text:"I am hungry.",          category:"Feelings",  tier:2 },
+  { text:"I am scared.",          category:"Feelings",  tier:2 },
+  { text:"Good morning.",         category:"Greetings", tier:2 },
+  { text:"Good night.",           category:"Greetings", tier:2 },
+  { text:"See you later.",        category:"Greetings", tier:2 },
+  { text:"Nice to meet you.",     category:"Greetings", tier:2 },
+  { text:"My name is ___.",       category:"Greetings", tier:2 },
+  { text:"I don't know.",         category:"Basics",    tier:2 },
+  { text:"Can you help me?",      category:"Basics",    tier:2 },
+  { text:"I don't understand.",   category:"Basics",    tier:2 },
+  { text:"Wait a minute.",        category:"Basics",    tier:2 },
+  { text:"Come here.",            category:"Basics",    tier:2 },
+  { text:"Sit down.",             category:"Basics",    tier:2 },
+  { text:"Good job!",             category:"Basics",    tier:2 },
+  { text:"Be quiet.",             category:"Basics",    tier:2 },
+  { text:"I am fine.",            category:"Feelings",  tier:2 },
+  { text:"What is your name?",      category:"Greetings", tier:3 },
+  { text:"Where are you from?",     category:"Greetings", tier:3 },
+  { text:"Where is the bathroom?",  category:"Places",    tier:3 },
+  { text:"I am learning ASL.",      category:"Basics",    tier:3 },
+  { text:"Please sign slower.",     category:"Basics",    tier:3 },
+  { text:"What time is it?",        category:"Time",      tier:3 },
+  { text:"What day is today?",      category:"Time",      tier:3 },
+  { text:"I am busy today.",        category:"Time",      tier:3 },
+  { text:"Do you have a dog?",      category:"Family",    tier:3 },
+  { text:"How old are you?",        category:"Basics",    tier:3 },
+  { text:"I live in Oklahoma.",     category:"Places",    tier:3 },
+  { text:"Are you okay?",           category:"Feelings",  tier:3 },
+  { text:"I need to go.",           category:"Basics",    tier:3 },
+  { text:"Let's go outside.",       category:"Basics",    tier:3 },
+  { text:"Do you want food?",       category:"Food",      tier:3 },
+  { text:"Can you please sign slower?",    category:"Basics",  tier:4 },
+  { text:"What is your favorite color?",   category:"Basics",  tier:4 },
+  { text:"I have a brother and a sister.", category:"Family",  tier:4 },
+  { text:"Do you want to play outside?",   category:"Basics",  tier:4 },
+  { text:"What school do you go to?",      category:"School",  tier:4 },
+  { text:"Can I have some water please?",  category:"Basics",  tier:4 },
+  { text:"What do you want to eat?",       category:"Food",    tier:4 },
+  { text:"My mom is at the store.",        category:"Family",  tier:4 },
+  { text:"I like pizza and hamburgers.",   category:"Food",    tier:4 },
+  { text:"See you tomorrow at school.",    category:"School",  tier:4 },
+  { text:"I need help with my homework.",  category:"School",  tier:4 },
+  { text:"What is your favorite sport?",   category:"Basics",  tier:4 },
+  { text:"What do you want to do today?",            category:"Basics",  tier:5 },
+  { text:"My favorite subject in school is math.",   category:"School",  tier:5 },
+  { text:"Can you show me how to sign that again?",  category:"Basics",  tier:5 },
+  { text:"I don't understand, can you repeat that?", category:"Basics",  tier:5 },
+  { text:"Where do you want to go for dinner?",      category:"Food",    tier:5 },
+  { text:"I have been learning ASL for a while.",    category:"Basics",  tier:5 },
+  { text:"My birthday is coming up really soon.",    category:"Family",  tier:5 },
+  { text:"We should practice signing every day.",    category:"Basics",  tier:5 },
+  { text:"What is your favorite movie or show?",     category:"Basics",  tier:5 },
+  { text:"I want to learn more signs every day.",    category:"Basics",  tier:5 },
 ];
 
-// ─── State — persisted in localStorage ───────────────────────
+// ─── Storage ─────────────────────────────────────────────────
+// Phrases stored separately from video blobs (blobs can be large)
+// Videos keyed by phrase text: 'vid_' + btoa(text)
+function videoKey(text) { return 'asl_vid_' + btoa(unescape(encodeURIComponent(text))).replace(/=/g,''); }
+
 function loadPhrases() {
-  try {
-    const saved = localStorage.getItem('asl_phrases');
-    if (saved) return JSON.parse(saved);
-  } catch(e) {}
+  try { const s = localStorage.getItem('asl_phrases'); if (s) return JSON.parse(s); } catch(e){}
   return JSON.parse(JSON.stringify(DEFAULT_PHRASES));
 }
-
-function savePhrases() {
-  try { localStorage.setItem('asl_phrases', JSON.stringify(allPhrases)); } catch(e) {}
-}
+function savePhrases() { try { localStorage.setItem('asl_phrases', JSON.stringify(allPhrases)); } catch(e){} }
+function saveVideo(text, dataUrl) { try { localStorage.setItem(videoKey(text), dataUrl); } catch(e){ alert('Storage full — try recording a shorter clip.'); } }
+function loadVideo(text) { try { return localStorage.getItem(videoKey(text)); } catch(e){ return null; } }
+function deleteVideo(text) { try { localStorage.removeItem(videoKey(text)); } catch(e){} }
 
 let allPhrases = loadPhrases();
 
 // ─── Game state ───────────────────────────────────────────────
-let queues = {}, turn = 0, scores = [0,0], names = ['Player 1','Player 2'];
-let roundNum = 0, totalRounds = 10, chosenPts = 0, currentCard = null;
-const ptColors = ['','var(--c1)','var(--c2)','var(--c3)','var(--c4)','var(--c5)'];
-const ptLabels = ['','Easy','Medium','Hard','Expert','Champ'];
+let queues={}, turn=0, scores=[0,0], names=['Player 1','Player 2'];
+let roundNum=0, totalRounds=10, chosenPts=0, currentCard=null;
+const ptColors=['','var(--c1)','var(--c2)','var(--c3)','var(--c4)','var(--c5)'];
+const ptLabels=['','Easy','Medium','Hard','Expert','Champ'];
 
-function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length-1; i>0; i--) { const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
-  return a;
-}
+function shuffle(arr) { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+function buildQueues() { queues={}; for(let t=1;t<=5;t++){const tp=allPhrases.filter(p=>p.tier===t); queues[t]=shuffle(tp.length?tp:allPhrases);} }
+function drawPhrase(tier) { if(!queues[tier]||!queues[tier].length){const tp=allPhrases.filter(p=>p.tier===tier); queues[tier]=shuffle(tp.length?tp:allPhrases);} return queues[tier].pop(); }
 
-function buildQueues() {
-  queues = {};
-  for (let t=1; t<=5; t++) {
-    const tier = allPhrases.filter(p => p.tier === t);
-    queues[t] = shuffle(tier.length ? tier : allPhrases); // fallback if tier empty
-  }
-}
-
-function drawPhrase(tier) {
-  if (!queues[tier] || !queues[tier].length) {
-    const tier_phrases = allPhrases.filter(p => p.tier === tier);
-    queues[tier] = shuffle(tier_phrases.length ? tier_phrases : allPhrases);
-  }
-  return queues[tier].pop();
-}
-
-function show(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
+function show(id) { document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); }
 
 // ─── Setup ───────────────────────────────────────────────────
 function startGame() {
-  names[0] = document.getElementById('name1').value.trim() || 'Player 1';
-  names[1] = document.getElementById('name2').value.trim() || 'Player 2';
-  document.getElementById('pName1').textContent = names[0];
-  document.getElementById('pName2').textContent = names[1];
-  buildQueues();
-  turn=0; scores=[0,0]; roundNum=0; chosenPts=0;
+  names[0]=document.getElementById('name1').value.trim()||'Player 1';
+  names[1]=document.getElementById('name2').value.trim()||'Player 2';
+  document.getElementById('pName1').textContent=names[0];
+  document.getElementById('pName2').textContent=names[1];
+  buildQueues(); turn=0; scores=[0,0]; roundNum=0; chosenPts=0;
   show('game'); showPickPhase();
 }
 
 // ─── Pick phase ───────────────────────────────────────────────
 function showPickPhase() {
-  document.getElementById('pickPhase').style.display = '';
-  document.getElementById('signPhase').style.display = 'none';
+  document.getElementById('pickPhase').style.display='';
+  document.getElementById('signPhase').style.display='none';
   updateScoreboard(); updateProgress();
-  const b = document.getElementById('turnBanner');
-  b.textContent = `${names[turn]}'s turn — pick your difficulty!`;
-  b.style.color = turn===0 ? 'var(--p1)' : 'var(--p2)';
+  const b=document.getElementById('turnBanner');
+  b.textContent=`${names[turn]}'s turn — pick your difficulty!`;
+  b.style.color=turn===0?'var(--p1)':'var(--p2)';
 }
 
 function pickPoints(pts) {
-  chosenPts = pts;
-  currentCard = drawPhrase(pts);
-
-  const chip = document.getElementById('ptsChip');
-  chip.textContent = `${pts} pt${pts>1?'s':''} · ${ptLabels[pts]}`;
-  chip.style.cssText = `background:${ptColors[pts]}22;color:${ptColors[pts]};border:1px solid ${ptColors[pts]}55`;
-
-  // Video
-  const wrap = document.getElementById('videoWrap');
-  wrap.innerHTML = '';
-  if (currentCard.video) {
-    const vid = document.createElement('video');
-    vid.src = currentCard.video;
-    vid.controls = true;
-    vid.autoplay = true;
-    vid.loop = true;
-    vid.playsInline = true;
+  chosenPts=pts; currentCard=drawPhrase(pts);
+  const chip=document.getElementById('ptsChip');
+  chip.textContent=`${pts} pt${pts>1?'s':''} · ${ptLabels[pts]}`;
+  chip.style.cssText=`background:${ptColors[pts]}22;color:${ptColors[pts]};border:1px solid ${ptColors[pts]}55`;
+  // Load video
+  const wrap=document.getElementById('videoWrap');
+  wrap.innerHTML='';
+  const blob=loadVideo(currentCard.text);
+  if (blob) {
+    const vid=document.createElement('video');
+    vid.src=blob; vid.controls=true; vid.autoplay=true; vid.loop=true; vid.playsInline=true;
+    vid.style.cssText='width:100%;height:100%;object-fit:cover;';
     wrap.appendChild(vid);
   } else {
-    wrap.innerHTML = '<div class="video-placeholder-msg">📹 Video coming soon</div>';
+    wrap.innerHTML='<div class="video-placeholder-msg">📹 No video recorded yet</div>';
   }
-
   document.getElementById('answerBox').classList.remove('shown');
   document.getElementById('resultRow').classList.remove('shown');
-  document.getElementById('revealBtn').style.display = '';
-  document.getElementById('pickPhase').style.display = 'none';
-  document.getElementById('signPhase').style.display = '';
-
-  const b = document.getElementById('turnBanner');
-  b.textContent = `${names[turn]} — watch, then sign it!`;
-  b.style.color = turn===0 ? 'var(--p1)' : 'var(--p2)';
+  document.getElementById('pickPhase').style.display='none';
+  document.getElementById('signPhase').style.display='';
+  const b=document.getElementById('turnBanner');
+  b.textContent=`${names[turn]} — watch, then sign it!`;
+  b.style.color=turn===0?'var(--p1)':'var(--p2)';
 }
 
 function revealAnswer() {
-  document.getElementById('answerText').textContent = currentCard.text;
-  document.getElementById('answerCategory').textContent = currentCard.category;
+  document.getElementById('answerText').textContent=currentCard.text;
+  document.getElementById('answerCategory').textContent=currentCard.category;
   document.getElementById('answerBox').classList.add('shown');
   document.getElementById('resultRow').classList.add('shown');
-  document.getElementById('revealBtn').style.display = 'none';
+  document.querySelector('.reveal-btn').style.display='none';
 }
 
 function result(nailed) {
-  if (nailed) { scores[turn] += chosenPts; spawnPointPop(`+${chosenPts}`, turn); }
+  if(nailed){scores[turn]+=chosenPts; spawnPointPop(`+${chosenPts}`,turn);}
   nextTurn();
 }
-
 function skipTurn() { nextTurn(); }
-
-function nextTurn() {
-  roundNum++;
-  if (roundNum >= totalRounds) { showWinner(); return; }
-  turn = 1 - turn; showPickPhase();
-}
+function nextTurn() { roundNum++; if(roundNum>=totalRounds){showWinner();return;} turn=1-turn; showPickPhase(); }
 
 function updateScoreboard() {
-  document.getElementById('pScore1').textContent = scores[0];
-  document.getElementById('pScore2').textContent = scores[1];
-  document.getElementById('scoreCard1').classList.toggle('active-turn', turn===0);
-  document.getElementById('scoreCard2').classList.toggle('active-turn', turn===1);
+  document.getElementById('pScore1').textContent=scores[0];
+  document.getElementById('pScore2').textContent=scores[1];
+  document.getElementById('scoreCard1').classList.toggle('active-turn',turn===0);
+  document.getElementById('scoreCard2').classList.toggle('active-turn',turn===1);
 }
-
 function updateProgress() {
-  document.getElementById('progressFill').style.width = (roundNum/totalRounds*100)+'%';
-  document.getElementById('progressLabel').textContent = `Round ${roundNum+1} of ${totalRounds}`;
+  document.getElementById('progressFill').style.width=(roundNum/totalRounds*100)+'%';
+  document.getElementById('progressLabel').textContent=`Round ${roundNum+1} of ${totalRounds}`;
 }
-
-function spawnPointPop(text, playerIdx) {
-  const card = document.getElementById('scoreCard'+(playerIdx+1));
-  const rect = card.getBoundingClientRect();
-  const el = document.createElement('div');
+function spawnPointPop(text,playerIdx) {
+  const card=document.getElementById('scoreCard'+(playerIdx+1));
+  const rect=card.getBoundingClientRect();
+  const el=document.createElement('div');
   el.className='point-pop'; el.textContent=text;
-  el.style.left=(rect.left+rect.width/2-24)+'px';
-  el.style.top=(rect.top+window.scrollY)+'px';
+  el.style.left=(rect.left+rect.width/2-24)+'px'; el.style.top=(rect.top+window.scrollY)+'px';
   el.style.color=playerIdx===0?'var(--p1)':'var(--p2)';
-  document.body.appendChild(el);
-  setTimeout(()=>el.remove(),1000);
+  document.body.appendChild(el); setTimeout(()=>el.remove(),1000);
 }
 
 function showWinner() {
-  document.getElementById('finalName1').textContent=names[0];
-  document.getElementById('finalName2').textContent=names[1];
-  document.getElementById('finalPts1').textContent=scores[0];
-  document.getElementById('finalPts2').textContent=scores[1];
+  document.getElementById('finalName1').textContent=names[0]; document.getElementById('finalName2').textContent=names[1];
+  document.getElementById('finalPts1').textContent=scores[0];  document.getElementById('finalPts2').textContent=scores[1];
   let emoji,title,sub;
-  if (scores[0]>scores[1]) { emoji='🏆';title=`${names[0]} wins!`;sub=`${scores[0]} to ${scores[1]} — awesome signing!`;document.getElementById('finalBox1').classList.add('winner-box'); }
-  else if (scores[1]>scores[0]) { emoji='🏆';title=`${names[1]} wins!`;sub=`${scores[1]} to ${scores[0]} — awesome signing!`;document.getElementById('finalBox2').classList.add('winner-box'); }
-  else { emoji='🤝';title="It's a tie!";sub=`Both scored ${scores[0]} points — great game!`; }
+  if(scores[0]>scores[1]){emoji='🏆';title=`${names[0]} wins!`;sub=`${scores[0]} to ${scores[1]} — awesome signing!`;document.getElementById('finalBox1').classList.add('winner-box');}
+  else if(scores[1]>scores[0]){emoji='🏆';title=`${names[1]} wins!`;sub=`${scores[1]} to ${scores[0]} — awesome signing!`;document.getElementById('finalBox2').classList.add('winner-box');}
+  else{emoji='🤝';title="It's a tie!";sub=`Both scored ${scores[0]} points — great game!`;}
   document.getElementById('winnerEmoji').textContent=emoji;
   document.getElementById('winnerTitle').textContent=title;
   document.getElementById('winnerSub').textContent=sub;
   show('winner');
 }
-
 function playAgain() {
   document.getElementById('finalBox1').classList.remove('winner-box');
   document.getElementById('finalBox2').classList.remove('winner-box');
@@ -503,32 +471,32 @@ function playAgain() {
   show('game'); showPickPhase();
 }
 
-// ─── Manage screen ────────────────────────────────────────────
+// ─── Manage ───────────────────────────────────────────────────
 function renderManage() {
-  const wrap = document.getElementById('phraseListWrap');
-  wrap.innerHTML = '';
-  for (let t=1; t<=5; t++) {
-    const section = document.createElement('div');
-    section.className = 'tier-section';
-    const tierPhrases = allPhrases.filter(p => p.tier===t);
-    const label = ['','Easy','Medium','Hard','Expert','Champ'][t];
-    section.innerHTML = `<div class="tier-label">Tier ${t} — ${label} (${tierPhrases.length} phrases)</div>`;
-    if (!tierPhrases.length) {
-      section.innerHTML += '<div class="empty-tier">No phrases in this tier yet.</div>';
-    } else {
-      tierPhrases.forEach(p => {
-        const idx = allPhrases.indexOf(p);
-        const item = document.createElement('div');
-        item.className = 'phrase-item';
-        item.innerHTML = `
-          <div style="flex:1">
-            <div class="phrase-item-text">${p.text}</div>
-            <div style="display:flex;gap:8px;margin-top:3px">
-              <span class="phrase-item-cat">${p.category}</span>
-              <span class="phrase-item-video">${p.video ? '📹 '+p.video : '📹 no video yet'}</span>
+  const wrap=document.getElementById('phraseListWrap');
+  wrap.innerHTML='';
+  for(let t=1;t<=5;t++){
+    const section=document.createElement('div'); section.className='tier-section';
+    const tp=allPhrases.filter(p=>p.tier===t);
+    const label=['','Easy','Medium','Hard','Expert','Champ'][t];
+    section.innerHTML=`<div class="tier-label">Tier ${t} — ${label} (${tp.length})</div>`;
+    if(!tp.length){ section.innerHTML+='<div class="empty-tier">No phrases yet.</div>'; }
+    else {
+      tp.forEach(p=>{
+        const idx=allPhrases.indexOf(p);
+        const hasVid=!!loadVideo(p.text);
+        const item=document.createElement('div'); item.className='phrase-item';
+        item.innerHTML=`
+          <div class="phrase-item-top">
+            <div style="flex:1">
+              <div class="phrase-item-text">${p.text}</div>
+              <div class="phrase-item-cat">${p.category}</div>
             </div>
-          </div>
-          <button class="delete-btn" onclick="deletePhrase(${idx})">Delete</button>`;
+            <div class="phrase-item-actions">
+              <button class="record-btn ${hasVid?'has-video':''}" onclick="openModal(${idx})">${hasVid?'✓ Re-record':'⏺ Record'}</button>
+              <button class="delete-btn" onclick="deletePhrase(${idx})">Delete</button>
+            </div>
+          </div>`;
         section.appendChild(item);
       });
     }
@@ -537,27 +505,85 @@ function renderManage() {
 }
 
 function addPhrase() {
-  const text = document.getElementById('newPhrase').value.trim();
-  const category = document.getElementById('newCategory').value.trim() || 'General';
-  const tier = parseInt(document.getElementById('newTier').value);
-  if (!text) { alert('Please enter a phrase.'); return; }
-  allPhrases.push({ text, category, tier, video: '' });
-  savePhrases();
-  document.getElementById('newPhrase').value = '';
-  document.getElementById('newCategory').value = '';
+  const text=document.getElementById('newPhrase').value.trim();
+  const category=document.getElementById('newCategory').value.trim()||'General';
+  const tier=parseInt(document.getElementById('newTier').value);
+  if(!text){alert('Please enter a phrase.');return;}
+  allPhrases.push({text,category,tier}); savePhrases();
+  document.getElementById('newPhrase').value=''; document.getElementById('newCategory').value='';
   renderManage();
 }
 
 function deletePhrase(idx) {
-  if (!confirm(`Delete "${allPhrases[idx].text}"?`)) return;
-  allPhrases.splice(idx, 1);
-  savePhrases();
-  renderManage();
+  if(!confirm(`Delete "${allPhrases[idx].text}"?`)) return;
+  deleteVideo(allPhrases[idx].text);
+  allPhrases.splice(idx,1); savePhrases(); renderManage();
 }
 
-// Enter key setup
-document.getElementById('name1').addEventListener('keydown', e => { if(e.key==='Enter') document.getElementById('name2').focus(); });
-document.getElementById('name2').addEventListener('keydown', e => { if(e.key==='Enter') startGame(); });
+// ─── Recording ───────────────────────────────────────────────
+let recordingIdx=null, mediaStream=null, mediaRecorder=null, recordedChunks=[];
+
+async function openModal(idx) {
+  recordingIdx=idx;
+  recordedChunks=[]; mediaRecorder=null;
+  document.getElementById('modalPhrase').textContent=allPhrases[idx].text;
+  document.getElementById('modalStatus').textContent='';
+  document.getElementById('btnStart').style.display='';
+  document.getElementById('btnStop').style.display='none';
+  document.getElementById('btnSave').style.display='none';
+  document.getElementById('recordModal').classList.remove('hidden');
+  try {
+    mediaStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user'},audio:false});
+    document.getElementById('cameraPreview').srcObject=mediaStream;
+  } catch(e) {
+    document.getElementById('modalStatus').textContent='Camera access denied. Please allow camera in your browser settings.';
+  }
+}
+
+function startRecording() {
+  if(!mediaStream){alert('No camera available.');return;}
+  recordedChunks=[];
+  const opts=MediaRecorder.isTypeSupported('video/webm;codecs=vp9')?{mimeType:'video/webm;codecs=vp9'}:
+              MediaRecorder.isTypeSupported('video/webm')?{mimeType:'video/webm'}:{};
+  mediaRecorder=new MediaRecorder(mediaStream,opts);
+  mediaRecorder.ondataavailable=e=>{ if(e.data.size>0) recordedChunks.push(e.data); };
+  mediaRecorder.onstop=()=>{
+    document.getElementById('btnSave').style.display='';
+    document.getElementById('modalStatus').textContent='✓ Recording saved — tap Save to keep it.';
+  };
+  mediaRecorder.start();
+  document.getElementById('btnStart').style.display='none';
+  document.getElementById('btnStop').style.display='';
+  document.getElementById('modalStatus').innerHTML='<span class="recording-dot"></span>Recording…';
+}
+
+function stopRecording() {
+  if(mediaRecorder&&mediaRecorder.state!=='inactive') mediaRecorder.stop();
+  document.getElementById('btnStop').style.display='none';
+}
+
+function saveRecording() {
+  if(!recordedChunks.length){alert('No recording found.');return;}
+  const blob=new Blob(recordedChunks,{type:recordedChunks[0].type||'video/webm'});
+  const reader=new FileReader();
+  reader.onload=()=>{
+    saveVideo(allPhrases[recordingIdx].text, reader.result);
+    document.getElementById('modalStatus').textContent='✅ Video saved!';
+    setTimeout(()=>{ closeModal(); renderManage(); },800);
+  };
+  reader.readAsDataURL(blob);
+}
+
+function closeModal() {
+  document.getElementById('recordModal').classList.add('hidden');
+  if(mediaStream){ mediaStream.getTracks().forEach(t=>t.stop()); mediaStream=null; }
+  if(mediaRecorder&&mediaRecorder.state!=='inactive') mediaRecorder.stop();
+  document.getElementById('cameraPreview').srcObject=null;
+}
+
+// ─── Init ─────────────────────────────────────────────────────
+document.getElementById('name1').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('name2').focus();});
+document.getElementById('name2').addEventListener('keydown',e=>{if(e.key==='Enter')startGame();});
 </script>
 </body>
 </html>
