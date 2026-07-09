@@ -75,7 +75,8 @@
   .pts-chip { font-family:'Nunito',sans-serif; font-size:.75rem; font-weight:900; padding:3px 10px; border-radius:20px; }
   .video-wrap { width:100%; aspect-ratio:16/9; background:#000; display:flex; align-items:center; justify-content:center; }
   .video-wrap video { width:100%; height:100%; object-fit:cover; }
-  .video-placeholder-msg { font-family:'Nunito',sans-serif; font-size:.8rem; font-weight:700; color:rgba(255,255,255,.3); text-align:center; padding:20px; }
+  .video-wrap iframe { width:100%; height:100%; border:none; }
+  .video-placeholder-msg { font-family:'Nunito',sans-serif; font-size:.8rem; font-weight:700; color:rgba(255,255,255,.3); text-align:center; padding:20px; line-height:1.6; }
   .reveal-btn { width:100%; padding:16px; border:1px solid rgba(255,255,255,.12); border-radius:14px; background:rgba(255,255,255,.08); color:var(--white); font-family:'Nunito',sans-serif; font-size:1rem; font-weight:900; cursor:pointer; margin-bottom:12px; }
   .reveal-btn:hover { background:rgba(255,255,255,.13); }
   .answer-box { width:100%; background:var(--card); border-radius:16px; padding:20px 22px; margin-bottom:12px; border:2px solid var(--bdr); text-align:center; display:none; }
@@ -114,7 +115,7 @@
   #manage { max-width:560px; gap:20px; padding-top:20px; }
   .manage-title { font-family:'Nunito',sans-serif; font-size:1.6rem; font-weight:900; text-align:center; }
   .manage-title span { color:var(--p1); }
-  .manage-note { font-size:.8rem; color:var(--muted); text-align:center; margin-top:-10px; line-height:1.5; }
+  .manage-note { font-size:.8rem; color:var(--muted); text-align:center; margin-top:-10px; line-height:1.6; }
   .add-form { width:100%; background:var(--card); border-radius:16px; padding:18px; border:2px solid var(--bdr); display:flex; flex-direction:column; gap:10px; }
   .add-form-title { font-family:'Nunito',sans-serif; font-size:.75rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
   .form-row { display:flex; gap:8px; flex-wrap:wrap; }
@@ -127,16 +128,25 @@
   .phrase-list-wrap { width:100%; }
   .tier-section { margin-bottom:20px; }
   .tier-label { font-family:'Nunito',sans-serif; font-size:.72rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; padding-left:4px; }
-  .phrase-item { background:var(--card); border-radius:12px; padding:12px 14px; margin-bottom:8px; border:1px solid var(--bdr); }
-  .phrase-item-top { display:flex; align-items:center; gap:8px; }
-  .phrase-item-text { flex:1; font-size:.9rem; font-weight:600; color:var(--white); line-height:1.3; }
+
+  /* Phrase item — expanded with video link field */
+  .phrase-item { background:var(--card); border-radius:12px; padding:14px; margin-bottom:8px; border:1px solid var(--bdr); }
+  .phrase-item-top { display:flex; align-items:center; gap:8px; margin-bottom:10px; }
+  .phrase-item-text { flex:1; font-size:.9rem; font-weight:700; color:var(--white); line-height:1.3; }
   .phrase-item-cat { font-size:.65rem; font-weight:700; color:var(--muted); letter-spacing:.06em; text-transform:uppercase; }
-  .phrase-item-actions { display:flex; gap:6px; align-items:center; flex-shrink:0; }
-  .record-btn { background:rgba(74,144,217,.2); border:1px solid rgba(74,144,217,.4); color:#7db8e8; border-radius:8px; padding:6px 10px; font-family:'Nunito',sans-serif; font-size:.72rem; font-weight:800; cursor:pointer; white-space:nowrap; }
-  .record-btn.has-video { background:rgba(107,203,119,.2); border-color:rgba(107,203,119,.4); color:#6bcb77; }
-  .delete-btn { background:rgba(242,95,92,.15); border:1px solid rgba(242,95,92,.25); color:#f25f5c; border-radius:8px; padding:6px 10px; font-family:'Nunito',sans-serif; font-size:.72rem; font-weight:800; cursor:pointer; }
+  .delete-btn { background:rgba(242,95,92,.15); border:1px solid rgba(242,95,92,.25); color:#f25f5c; border-radius:8px; padding:6px 10px; font-family:'Nunito',sans-serif; font-size:.72rem; font-weight:800; cursor:pointer; flex-shrink:0; }
   .delete-btn:hover { background:rgba(242,95,92,.3); }
-  .hidden-file-input { display:none; }
+
+  /* Video link row */
+  .video-link-row { display:flex; gap:8px; align-items:center; }
+  .video-link-input { flex:1; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:8px; padding:8px 10px; font-family:'Nunito Sans',sans-serif; font-size:.75rem; color:var(--white); outline:none; }
+  .video-link-input::placeholder { color:rgba(255,255,255,.25); }
+  .video-link-input:focus { border-color:rgba(255,255,255,.3); }
+  .video-link-input.has-link { border-color:rgba(107,203,119,.4); background:rgba(107,203,119,.06); }
+  .save-link-btn { padding:8px 12px; border:none; border-radius:8px; background:var(--p1); color:#1a1a1a; font-family:'Nunito',sans-serif; font-size:.72rem; font-weight:900; cursor:pointer; white-space:nowrap; flex-shrink:0; }
+  .clear-link-btn { padding:8px 10px; border:1px solid rgba(242,95,92,.3); border-radius:8px; background:transparent; color:#f25f5c; font-family:'Nunito',sans-serif; font-size:.72rem; font-weight:800; cursor:pointer; flex-shrink:0; }
+  .video-status { font-size:.68rem; color:#6bcb77; margin-top:4px; display:none; }
+  .video-status.show { display:block; }
 
   .back-btn { width:100%; padding:13px; border:1px solid rgba(255,255,255,.1); border-radius:12px; background:transparent; color:rgba(255,255,255,.5); font-family:'Nunito',sans-serif; font-size:.9rem; font-weight:800; cursor:pointer; }
   .back-btn:hover { background:rgba(255,255,255,.05); color:var(--white); }
@@ -155,7 +165,7 @@
   </div>
   <div class="setup-btn-row">
     <button class="start-btn" onclick="startGame()">Let's play! 🤟</button>
-    <span class="manage-link" onclick="show('manage');renderManage()">⚙️ Manage phrases &amp; record videos</span>
+    <span class="manage-link" onclick="show('manage');renderManage()">⚙️ Manage phrases &amp; videos</span>
   </div>
 </div>
 
@@ -170,6 +180,7 @@
     <span class="progress-label" id="progressLabel"></span>
   </div>
   <div class="turn-banner" id="turnBanner"></div>
+
   <div id="pickPhase">
     <div class="pick-label">Choose your difficulty 👇</div>
     <div class="pt-pick-row">
@@ -180,6 +191,7 @@
       <button class="pt-pick-btn" data-pts="5" onclick="pickPoints(5)">5<span class="pt-sub">Champ</span></button>
     </div>
   </div>
+
   <div id="signPhase" style="display:none;">
     <div class="phrase-card">
       <div class="phrase-card-header">
@@ -217,7 +229,12 @@
 <!-- Manage -->
 <div id="manage" class="screen">
   <div class="manage-title">⚙️ Manage <span>Phrases</span></div>
-  <p class="manage-note">Tap <strong>Upload Video</strong> next to any phrase to pick a video from your camera roll. It saves automatically.</p>
+  <p class="manage-note">
+    Add phrases below. For videos, paste a <strong>Google Drive share link</strong> and tap Save — no help needed, ever.
+    <br><br>
+    <strong>How to get a Google Drive link:</strong> Upload your video to Drive → tap the file → Share → "Anyone with the link" → Copy link → paste it here.
+  </p>
+
   <div class="add-form">
     <div class="add-form-title">Add a new phrase</div>
     <input class="form-input" id="newPhrase" type="text" placeholder="Type the phrase…"/>
@@ -233,12 +250,10 @@
       <button class="add-btn" onclick="addPhrase()">Add</button>
     </div>
   </div>
+
   <div class="phrase-list-wrap" id="phraseListWrap"></div>
   <button class="back-btn" onclick="show('setup')">← Back to game</button>
 </div>
-
-<!-- Hidden file input for video upload -->
-<input type="file" accept="video/*" id="videoFileInput" class="hidden-file-input" onchange="handleVideoUpload(event)"/>
 
 <script>
 // ─── Default phrases ──────────────────────────────────────────
@@ -315,18 +330,33 @@ const DEFAULT_PHRASES = [
 ];
 
 // ─── Storage ─────────────────────────────────────────────────
-// Phrases stored separately from video blobs (blobs can be large)
-// Videos keyed by phrase text: 'vid_' + btoa(text)
-function videoKey(text) { return 'asl_vid_' + btoa(unescape(encodeURIComponent(text))).replace(/=/g,''); }
-
+// Phrases stored in localStorage
+// Video links stored separately: key = 'asl_link_' + index in allPhrases
 function loadPhrases() {
-  try { const s = localStorage.getItem('asl_phrases'); if (s) return JSON.parse(s); } catch(e){}
+  try { const s=localStorage.getItem('asl_phrases'); if(s) return JSON.parse(s); } catch(e){}
   return JSON.parse(JSON.stringify(DEFAULT_PHRASES));
 }
 function savePhrases() { try { localStorage.setItem('asl_phrases', JSON.stringify(allPhrases)); } catch(e){} }
-function saveVideo(text, dataUrl) { try { localStorage.setItem(videoKey(text), dataUrl); } catch(e){ alert('Storage full — try recording a shorter clip.'); } }
-function loadVideo(text) { try { return localStorage.getItem(videoKey(text)); } catch(e){ return null; } }
-function deleteVideo(text) { try { localStorage.removeItem(videoKey(text)); } catch(e){} }
+
+function linkKey(text) { return 'asl_link_'+btoa(unescape(encodeURIComponent(text))).replace(/[=+/]/g,'_'); }
+function saveLink(text, url) { try { localStorage.setItem(linkKey(text), url); } catch(e){ alert('Could not save — storage full.'); } }
+function loadLink(text) { try { return localStorage.getItem(linkKey(text))||''; } catch(e){ return ''; } }
+function deleteLink(text) { try { localStorage.removeItem(linkKey(text)); } catch(e){} }
+
+// Convert Google Drive share link → embeddable link
+function driveEmbedUrl(raw) {
+  if (!raw || !raw.trim()) return null;
+  raw = raw.trim();
+  // Already a direct/embed link
+  if (raw.includes('drive.google.com/file/d/')) {
+    const m = raw.match(/\/file\/d\/([^/]+)/);
+    if (m) return `https://drive.google.com/file/d/${m[1]}/preview`;
+  }
+  // drive.google.com/open?id=
+  const m2 = raw.match(/[?&]id=([^&]+)/);
+  if (m2) return `https://drive.google.com/file/d/${m2[1]}/preview`;
+  return null;
+}
 
 let allPhrases = loadPhrases();
 
@@ -337,9 +367,8 @@ const ptColors=['','var(--c1)','var(--c2)','var(--c3)','var(--c4)','var(--c5)'];
 const ptLabels=['','Easy','Medium','Hard','Expert','Champ'];
 
 function shuffle(arr) { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
-function buildQueues() { queues={}; for(let t=1;t<=5;t++){const tp=allPhrases.filter(p=>p.tier===t); queues[t]=shuffle(tp.length?tp:allPhrases);} }
-function drawPhrase(tier) { if(!queues[tier]||!queues[tier].length){const tp=allPhrases.filter(p=>p.tier===tier); queues[tier]=shuffle(tp.length?tp:allPhrases);} return queues[tier].pop(); }
-
+function buildQueues() { queues={}; for(let t=1;t<=5;t++){const tp=allPhrases.filter(p=>p.tier===t); queues[t]=shuffle(tp.length?tp:[...allPhrases]);} }
+function drawPhrase(tier) { if(!queues[tier]||!queues[tier].length){const tp=allPhrases.filter(p=>p.tier===tier); queues[tier]=shuffle(tp.length?tp:[...allPhrases]);} return queues[tier].pop(); }
 function show(id) { document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); }
 
 // ─── Setup ───────────────────────────────────────────────────
@@ -352,7 +381,6 @@ function startGame() {
   show('game'); showPickPhase();
 }
 
-// ─── Pick phase ───────────────────────────────────────────────
 function showPickPhase() {
   document.getElementById('pickPhase').style.display='';
   document.getElementById('signPhase').style.display='none';
@@ -367,20 +395,25 @@ function pickPoints(pts) {
   const chip=document.getElementById('ptsChip');
   chip.textContent=`${pts} pt${pts>1?'s':''} · ${ptLabels[pts]}`;
   chip.style.cssText=`background:${ptColors[pts]}22;color:${ptColors[pts]};border:1px solid ${ptColors[pts]}55`;
+
   // Load video
   const wrap=document.getElementById('videoWrap');
   wrap.innerHTML='';
-  const blob=loadVideo(currentCard.text);
-  if (blob) {
-    const vid=document.createElement('video');
-    vid.src=blob; vid.controls=true; vid.autoplay=true; vid.loop=true; vid.playsInline=true;
-    vid.style.cssText='width:100%;height:100%;object-fit:cover;';
-    wrap.appendChild(vid);
+  const savedLink=loadLink(currentCard.text);
+  const embedUrl=driveEmbedUrl(savedLink);
+  if (embedUrl) {
+    const iframe=document.createElement('iframe');
+    iframe.src=embedUrl;
+    iframe.allow='autoplay';
+    iframe.allowFullscreen=true;
+    wrap.appendChild(iframe);
   } else {
-    wrap.innerHTML='<div class="video-placeholder-msg">📹 No video recorded yet</div>';
+    wrap.innerHTML='<div class="video-placeholder-msg">📹 No video yet<br><span style="font-size:.7rem;opacity:.6">Add one in Manage Phrases</span></div>';
   }
+
   document.getElementById('answerBox').classList.remove('shown');
   document.getElementById('resultRow').classList.remove('shown');
+  document.querySelector('.reveal-btn').style.display='';
   document.getElementById('pickPhase').style.display='none';
   document.getElementById('signPhase').style.display='';
   const b=document.getElementById('turnBanner');
@@ -455,7 +488,8 @@ function renderManage() {
     else {
       tp.forEach(p=>{
         const idx=allPhrases.indexOf(p);
-        const hasVid=!!loadVideo(p.text);
+        const savedLink=loadLink(p.text);
+        const hasLink=!!savedLink;
         const item=document.createElement('div'); item.className='phrase-item';
         item.innerHTML=`
           <div class="phrase-item-top">
@@ -463,16 +497,42 @@ function renderManage() {
               <div class="phrase-item-text">${p.text}</div>
               <div class="phrase-item-cat">${p.category}</div>
             </div>
-            <div class="phrase-item-actions">
-              <button class="record-btn ${hasVid?'has-video':''}" onclick="triggerUpload(${idx})">${hasVid?'✓ Re-upload':'📹 Upload Video'}</button>
-              <button class="delete-btn" onclick="deletePhrase(${idx})">Delete</button>
-            </div>
-          </div>`;
+            <button class="delete-btn" onclick="deletePhrase(${idx})">Delete</button>
+          </div>
+          <div class="video-link-row">
+            <input
+              class="video-link-input${hasLink?' has-link':''}"
+              id="link_${idx}"
+              type="url"
+              placeholder="Paste Google Drive link here…"
+              value="${savedLink}"
+            />
+            <button class="save-link-btn" onclick="saveLink_('${idx}')">Save</button>
+            ${hasLink?`<button class="clear-link-btn" onclick="clearLink('${idx}')">✕</button>`:''}
+          </div>
+          <div class="video-status${hasLink?' show':''}" id="status_${idx}">✓ Video linked</div>`;
         section.appendChild(item);
       });
     }
     wrap.appendChild(section);
   }
+}
+
+function saveLink_(idx) {
+  const input=document.getElementById('link_'+idx);
+  const url=input.value.trim();
+  if(!url){ alert('Please paste a Google Drive link first.'); return; }
+  if(!driveEmbedUrl(url)){ alert('That doesn\'t look like a Google Drive link. Make sure it\'s a drive.google.com share link.'); return; }
+  saveLink(allPhrases[idx].text, url);
+  input.classList.add('has-link');
+  const status=document.getElementById('status_'+idx);
+  status.textContent='✓ Video linked'; status.classList.add('show');
+  renderManage();
+}
+
+function clearLink(idx) {
+  deleteLink(allPhrases[idx].text);
+  renderManage();
 }
 
 function addPhrase() {
@@ -487,33 +547,8 @@ function addPhrase() {
 
 function deletePhrase(idx) {
   if(!confirm(`Delete "${allPhrases[idx].text}"?`)) return;
-  deleteVideo(allPhrases[idx].text);
+  deleteLink(allPhrases[idx].text);
   allPhrases.splice(idx,1); savePhrases(); renderManage();
-}
-
-// ─── Upload video ─────────────────────────────────────────────
-let uploadingIdx = null;
-
-function triggerUpload(idx) {
-  uploadingIdx = idx;
-  const input = document.getElementById('videoFileInput');
-  input.value = ''; // reset so same file can be re-selected
-  input.click();
-}
-
-function handleVideoUpload(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = () => {
-    try {
-      saveVideo(allPhrases[uploadingIdx].text, reader.result);
-      renderManage();
-    } catch(e) {
-      alert('Video too large to save. Try a shorter clip (under 10 seconds).');
-    }
-  };
-  reader.readAsDataURL(file);
 }
 
 // ─── Init ─────────────────────────────────────────────────────
