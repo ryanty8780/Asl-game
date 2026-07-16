@@ -17,7 +17,7 @@
   .screen { display:none; flex-direction:column; align-items:center; width:100%; }
   .screen.active { display:flex; }
 
-  /* Setup */
+  /* ── Setup ── */
   #setup { max-width:400px; gap:24px; padding-top:40px; }
   .setup-title { font-family:'Nunito',sans-serif; font-size:2.4rem; font-weight:900; text-align:center; line-height:1.1; }
   .setup-title span { color:var(--p1); }
@@ -37,7 +37,7 @@
   .manage-link { text-align:center; font-size:.82rem; color:var(--muted); cursor:pointer; text-decoration:underline; }
   .manage-link:hover { color:var(--white); }
 
-  /* Game */
+  /* ── Game ── */
   #game { max-width:540px; }
   .scoreboard { display:grid; grid-template-columns:1fr 1fr; gap:10px; width:100%; margin-bottom:16px; }
   .player-score { background:var(--card); border-radius:14px; padding:14px 16px; text-align:center; border:2px solid var(--bdr); transition:border-color .3s,box-shadow .3s; position:relative; overflow:hidden; }
@@ -71,18 +71,17 @@
   #signPhase { width:100%; }
   .phrase-card { width:100%; background:var(--card); border-radius:20px; overflow:hidden; margin-bottom:14px; border:2px solid var(--bdr); }
   .phrase-card-header { display:flex; align-items:center; justify-content:space-between; padding:14px 18px 10px; }
-  .phrase-card-title { font-family:'Nunito',sans-serif; font-size:.78rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+  .phrase-card-label { font-family:'Nunito',sans-serif; font-size:.78rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
   .pts-chip { font-family:'Nunito',sans-serif; font-size:.75rem; font-weight:900; padding:3px 10px; border-radius:20px; }
-  .video-wrap { width:100%; aspect-ratio:16/9; background:#000; display:flex; align-items:center; justify-content:center; }
-  .video-wrap video { width:100%; height:100%; object-fit:cover; }
-  .video-wrap iframe { width:100%; height:100%; border:none; }
-  .video-placeholder-msg { font-family:'Nunito',sans-serif; font-size:.8rem; font-weight:700; color:rgba(255,255,255,.3); text-align:center; padding:20px; line-height:1.6; }
-  .reveal-btn { width:100%; padding:16px; border:1px solid rgba(255,255,255,.12); border-radius:14px; background:rgba(255,255,255,.08); color:var(--white); font-family:'Nunito',sans-serif; font-size:1rem; font-weight:900; cursor:pointer; margin-bottom:12px; }
-  .reveal-btn:hover { background:rgba(255,255,255,.13); }
-  .answer-box { width:100%; background:var(--card); border-radius:16px; padding:20px 22px; margin-bottom:12px; border:2px solid var(--bdr); text-align:center; display:none; }
+  .video-wrap { width:100%; aspect-ratio:16/9; background:#000; display:flex; align-items:center; justify-content:center; position:relative; }
+  .video-wrap iframe { width:100%; height:100%; border:none; display:block; }
+  .video-placeholder-msg { font-family:'Nunito',sans-serif; font-size:.85rem; font-weight:700; color:rgba(255,255,255,.3); text-align:center; padding:24px; line-height:1.7; }
+  .reveal-btn { width:100%; padding:16px; border:1px solid rgba(255,255,255,.12); border-radius:14px; background:rgba(255,255,255,.08); color:var(--white); font-family:'Nunito',sans-serif; font-size:1rem; font-weight:900; cursor:pointer; margin-bottom:12px; transition:background .2s; }
+  .reveal-btn:hover { background:rgba(255,255,255,.14); }
+  .answer-box { width:100%; background:var(--card); border-radius:16px; padding:22px; margin-bottom:12px; border:2px solid var(--bdr); text-align:center; display:none; }
   .answer-box.shown { display:block; }
-  .answer-eyebrow { font-size:.68rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
-  .answer-text { font-family:'Nunito',sans-serif; font-size:clamp(1.1rem,4vw,1.5rem); font-weight:800; color:var(--white); line-height:1.3; }
+  .answer-eyebrow { font-size:.68rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:10px; }
+  .answer-text { font-family:'Nunito',sans-serif; font-size:clamp(1.15rem,4vw,1.6rem); font-weight:800; color:var(--white); line-height:1.3; }
   .answer-category { font-size:.7rem; font-weight:700; color:var(--muted); letter-spacing:.06em; text-transform:uppercase; margin-top:8px; }
   .result-row { display:none; grid-template-columns:1fr 1fr; gap:10px; width:100%; margin-bottom:10px; }
   .result-row.shown { display:grid; }
@@ -97,7 +96,7 @@
   .point-pop { position:fixed; font-family:'Nunito',sans-serif; font-size:2rem; font-weight:900; pointer-events:none; animation:popUp 1s ease forwards; z-index:100; }
   @keyframes popUp { 0%{opacity:1;transform:translateY(0) scale(1)} 60%{opacity:1;transform:translateY(-60px) scale(1.3)} 100%{opacity:0;transform:translateY(-100px) scale(.9)} }
 
-  /* Winner */
+  /* ── Winner ── */
   #winner { max-width:420px; gap:20px; padding-top:20px; text-align:center; }
   .winner-emoji { font-size:5rem; line-height:1; }
   .winner-title { font-family:'Nunito',sans-serif; font-size:2.2rem; font-weight:900; line-height:1.1; }
@@ -111,44 +110,52 @@
   .play-again-btn { width:100%; padding:16px; border:none; border-radius:14px; background:var(--p1); color:#1a1a1a; font-family:'Nunito',sans-serif; font-size:1.1rem; font-weight:900; cursor:pointer; }
   .play-again-btn:hover { filter:brightness(1.08); }
 
-  /* Manage */
-  #manage { max-width:560px; gap:20px; padding-top:20px; }
+  /* ── Manage ── */
+  #manage { max-width:580px; gap:18px; padding-top:20px; }
   .manage-title { font-family:'Nunito',sans-serif; font-size:1.6rem; font-weight:900; text-align:center; }
   .manage-title span { color:var(--p1); }
-  .manage-note { font-size:.8rem; color:var(--muted); text-align:center; margin-top:-10px; line-height:1.6; }
+  .manage-note { font-size:.8rem; color:var(--muted); text-align:center; line-height:1.6; }
+
+  /* Add form */
   .add-form { width:100%; background:var(--card); border-radius:16px; padding:18px; border:2px solid var(--bdr); display:flex; flex-direction:column; gap:10px; }
   .add-form-title { font-family:'Nunito',sans-serif; font-size:.75rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
-  .form-row { display:flex; gap:8px; flex-wrap:wrap; }
-  .form-input { flex:1; min-width:120px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12); border-radius:10px; padding:10px 12px; font-family:'Nunito Sans',sans-serif; font-size:.9rem; color:var(--white); outline:none; }
+  .form-input { width:100%; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12); border-radius:10px; padding:10px 12px; font-family:'Nunito Sans',sans-serif; font-size:.9rem; color:var(--white); outline:none; }
   .form-input::placeholder { color:var(--muted); }
-  .form-select { background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12); border-radius:10px; padding:10px 12px; font-family:'Nunito Sans',sans-serif; font-size:.9rem; color:var(--white); outline:none; cursor:pointer; }
+  .form-input:focus { border-color:rgba(255,255,255,.3); }
+  .form-row { display:flex; gap:8px; }
+  .form-select { flex:1; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12); border-radius:10px; padding:10px 12px; font-family:'Nunito Sans',sans-serif; font-size:.9rem; color:var(--white); outline:none; cursor:pointer; }
   .form-select option { background:#1a2e47; }
-  .add-btn { padding:11px 18px; border:none; border-radius:10px; background:var(--p1); color:#1a1a1a; font-family:'Nunito',sans-serif; font-size:.9rem; font-weight:900; cursor:pointer; }
+  .add-btn { padding:11px 20px; border:none; border-radius:10px; background:var(--p1); color:#1a1a1a; font-family:'Nunito',sans-serif; font-size:.9rem; font-weight:900; cursor:pointer; white-space:nowrap; }
 
+  /* Phrase list */
   .phrase-list-wrap { width:100%; }
-  .tier-section { margin-bottom:20px; }
-  .tier-label { font-family:'Nunito',sans-serif; font-size:.72rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; padding-left:4px; }
+  .tier-section { margin-bottom:22px; }
+  .tier-label { font-family:'Nunito',sans-serif; font-size:.72rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; padding-left:2px; }
 
-  /* Phrase item — expanded with video link field */
-  .phrase-item { background:var(--card); border-radius:12px; padding:14px; margin-bottom:8px; border:1px solid var(--bdr); }
-  .phrase-item-top { display:flex; align-items:center; gap:8px; margin-bottom:10px; }
-  .phrase-item-text { flex:1; font-size:.9rem; font-weight:700; color:var(--white); line-height:1.3; }
-  .phrase-item-cat { font-size:.65rem; font-weight:700; color:var(--muted); letter-spacing:.06em; text-transform:uppercase; }
-  .delete-btn { background:rgba(242,95,92,.15); border:1px solid rgba(242,95,92,.25); color:#f25f5c; border-radius:8px; padding:6px 10px; font-family:'Nunito',sans-serif; font-size:.72rem; font-weight:800; cursor:pointer; flex-shrink:0; }
-  .delete-btn:hover { background:rgba(242,95,92,.3); }
+  .phrase-item { background:var(--card); border-radius:14px; padding:14px; margin-bottom:8px; border:1px solid var(--bdr); }
+  .phrase-item-header { display:flex; align-items:flex-start; gap:8px; margin-bottom:10px; }
+  .phrase-item-info { flex:1; }
+  .phrase-item-text { font-size:.95rem; font-weight:700; color:var(--white); line-height:1.3; margin-bottom:2px; }
+  .phrase-item-meta { font-size:.65rem; font-weight:700; color:var(--muted); letter-spacing:.06em; text-transform:uppercase; }
+  .phrase-has-video { color:#6bcb77; }
 
-  /* Video link row */
-  .video-link-row { display:flex; gap:8px; align-items:center; }
-  .video-link-input { flex:1; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:8px; padding:8px 10px; font-family:'Nunito Sans',sans-serif; font-size:.75rem; color:var(--white); outline:none; }
-  .video-link-input::placeholder { color:rgba(255,255,255,.25); }
-  .video-link-input:focus { border-color:rgba(255,255,255,.3); }
-  .video-link-input.has-link { border-color:rgba(107,203,119,.4); background:rgba(107,203,119,.06); }
-  .save-link-btn { padding:8px 12px; border:none; border-radius:8px; background:var(--p1); color:#1a1a1a; font-family:'Nunito',sans-serif; font-size:.72rem; font-weight:900; cursor:pointer; white-space:nowrap; flex-shrink:0; }
-  .clear-link-btn { padding:8px 10px; border:1px solid rgba(242,95,92,.3); border-radius:8px; background:transparent; color:#f25f5c; font-family:'Nunito',sans-serif; font-size:.72rem; font-weight:800; cursor:pointer; flex-shrink:0; }
-  .video-status { font-size:.68rem; color:#6bcb77; margin-top:4px; display:none; }
-  .video-status.show { display:block; }
+  .item-action-row { display:flex; gap:6px; flex-shrink:0; }
+  .edit-btn { background:rgba(74,144,217,.15); border:1px solid rgba(74,144,217,.3); color:#7db8e8; border-radius:8px; padding:6px 10px; font-family:'Nunito',sans-serif; font-size:.72rem; font-weight:800; cursor:pointer; }
+  .delete-btn { background:rgba(242,95,92,.15); border:1px solid rgba(242,95,92,.25); color:#f25f5c; border-radius:8px; padding:6px 10px; font-family:'Nunito',sans-serif; font-size:.72rem; font-weight:800; cursor:pointer; }
 
-  .back-btn { width:100%; padding:13px; border:1px solid rgba(255,255,255,.1); border-radius:12px; background:transparent; color:rgba(255,255,255,.5); font-family:'Nunito',sans-serif; font-size:.9rem; font-weight:800; cursor:pointer; }
+  /* Inline edit panel */
+  .edit-panel { display:none; flex-direction:column; gap:8px; padding-top:10px; border-top:1px solid var(--bdr); margin-top:4px; }
+  .edit-panel.open { display:flex; }
+  .edit-label { font-size:.68rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+  .edit-input { width:100%; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.15); border-radius:8px; padding:9px 11px; font-family:'Nunito Sans',sans-serif; font-size:.85rem; color:var(--white); outline:none; }
+  .edit-input::placeholder { color:rgba(255,255,255,.25); }
+  .edit-input:focus { border-color:rgba(255,255,255,.35); }
+  .edit-input.linked { border-color:rgba(107,203,119,.5); background:rgba(107,203,119,.06); }
+  .edit-save-btn { padding:10px; border:none; border-radius:8px; background:var(--p1); color:#1a1a1a; font-family:'Nunito',sans-serif; font-size:.82rem; font-weight:900; cursor:pointer; }
+  .edit-cancel-btn { padding:10px; border:1px solid rgba(255,255,255,.1); border-radius:8px; background:transparent; color:var(--muted); font-family:'Nunito',sans-serif; font-size:.82rem; font-weight:700; cursor:pointer; }
+  .edit-btn-row { display:flex; gap:8px; }
+
+  .back-btn { width:100%; padding:13px; border:1px solid rgba(255,255,255,.1); border-radius:12px; background:transparent; color:rgba(255,255,255,.5); font-family:'Nunito',sans-serif; font-size:.9rem; font-weight:800; cursor:pointer; margin-top:4px; }
   .back-btn:hover { background:rgba(255,255,255,.05); color:var(--white); }
   .empty-tier { font-size:.82rem; color:rgba(255,255,255,.2); padding:8px 4px; font-style:italic; }
 </style>
@@ -158,7 +165,7 @@
 <!-- Setup -->
 <div id="setup" class="screen active">
   <div class="setup-title">ASL<br><span>Sign Game</span> 🤟</div>
-  <p class="setup-sub">Pick your points, watch the video, sign it, reveal the answer!</p>
+  <p class="setup-sub">Pick your difficulty, watch the video, sign it, then reveal the answer!</p>
   <div class="name-group">
     <div class="name-wrap p1"><div class="name-dot"></div><input class="name-input" id="name1" type="text" placeholder="Player 1 name" maxlength="14"/></div>
     <div class="name-wrap p2"><div class="name-dot"></div><input class="name-input" id="name2" type="text" placeholder="Player 2 name" maxlength="14"/></div>
@@ -181,6 +188,7 @@
   </div>
   <div class="turn-banner" id="turnBanner"></div>
 
+  <!-- Pick difficulty -->
   <div id="pickPhase">
     <div class="pick-label">Choose your difficulty 👇</div>
     <div class="pt-pick-row">
@@ -192,17 +200,18 @@
     </div>
   </div>
 
+  <!-- Watch & sign -->
   <div id="signPhase" style="display:none;">
     <div class="phrase-card">
       <div class="phrase-card-header">
-        <span class="phrase-card-title">Watch &amp; Sign</span>
+        <span class="phrase-card-label">Watch &amp; Sign</span>
         <span class="pts-chip" id="ptsChip"></span>
       </div>
       <div class="video-wrap" id="videoWrap"></div>
     </div>
-    <button class="reveal-btn" onclick="revealAnswer()">👀 Reveal Answer</button>
+    <button class="reveal-btn" id="revealBtn" onclick="revealAnswer()">👀 Reveal Answer</button>
     <div class="answer-box" id="answerBox">
-      <div class="answer-eyebrow">The phrase was…</div>
+      <div class="answer-eyebrow">The answer is…</div>
       <div class="answer-text" id="answerText"></div>
       <div class="answer-category" id="answerCategory"></div>
     </div>
@@ -229,17 +238,15 @@
 <!-- Manage -->
 <div id="manage" class="screen">
   <div class="manage-title">⚙️ Manage <span>Phrases</span></div>
-  <p class="manage-note">
-    Add phrases below. For videos, paste a <strong>Google Drive share link</strong> and tap Save — no help needed, ever.
-    <br><br>
-    <strong>How to get a Google Drive link:</strong> Upload your video to Drive → tap the file → Share → "Anyone with the link" → Copy link → paste it here.
-  </p>
+  <p class="manage-note">Add a YouTube link and the answer text for each phrase. Tap <strong>Edit</strong> on any card to update it anytime.</p>
 
+  <!-- Add new -->
   <div class="add-form">
-    <div class="add-form-title">Add a new phrase</div>
-    <input class="form-input" id="newPhrase" type="text" placeholder="Type the phrase…"/>
+    <div class="add-form-title">➕ Add a new phrase</div>
+    <input class="form-input" id="newAnswer" type="text" placeholder="Answer text (e.g. I love you)"/>
+    <input class="form-input" id="newCategory" type="text" placeholder="Category (e.g. Greetings)"/>
+    <input class="form-input" id="newVideo" type="url" placeholder="YouTube link (optional — add later)"/>
     <div class="form-row">
-      <input class="form-input" id="newCategory" type="text" placeholder="Category (e.g. Greetings)"/>
       <select class="form-select" id="newTier">
         <option value="1">1 — Easy</option>
         <option value="2">2 — Medium</option>
@@ -256,111 +263,110 @@
 </div>
 
 <script>
-// ─── Default phrases ──────────────────────────────────────────
+// ─── Data ─────────────────────────────────────────────────────
+// Each phrase: { answer, category, tier, video }
+// video: YouTube URL (any format) — stored as-is, converted to embed on play
+
 const DEFAULT_PHRASES = [
-  { text:"Hello!",            category:"Greetings", tier:1 },
-  { text:"Goodbye.",          category:"Greetings", tier:1 },
-  { text:"Please.",           category:"Basics",    tier:1 },
-  { text:"Thank you.",        category:"Basics",    tier:1 },
-  { text:"You're welcome.",   category:"Basics",    tier:1 },
-  { text:"Sorry.",            category:"Basics",    tier:1 },
-  { text:"Yes.",              category:"Basics",    tier:1 },
-  { text:"No.",               category:"Basics",    tier:1 },
-  { text:"Help!",             category:"Basics",    tier:1 },
-  { text:"I love you.",       category:"Feelings",  tier:1 },
-  { text:"More.",             category:"Basics",    tier:1 },
-  { text:"Stop.",             category:"Basics",    tier:1 },
-  { text:"How are you?",          category:"Greetings", tier:2 },
-  { text:"I am happy.",           category:"Feelings",  tier:2 },
-  { text:"I am sad.",             category:"Feelings",  tier:2 },
-  { text:"I am tired.",           category:"Feelings",  tier:2 },
-  { text:"I am hungry.",          category:"Feelings",  tier:2 },
-  { text:"I am scared.",          category:"Feelings",  tier:2 },
-  { text:"Good morning.",         category:"Greetings", tier:2 },
-  { text:"Good night.",           category:"Greetings", tier:2 },
-  { text:"See you later.",        category:"Greetings", tier:2 },
-  { text:"Nice to meet you.",     category:"Greetings", tier:2 },
-  { text:"My name is ___.",       category:"Greetings", tier:2 },
-  { text:"I don't know.",         category:"Basics",    tier:2 },
-  { text:"Can you help me?",      category:"Basics",    tier:2 },
-  { text:"I don't understand.",   category:"Basics",    tier:2 },
-  { text:"Wait a minute.",        category:"Basics",    tier:2 },
-  { text:"Come here.",            category:"Basics",    tier:2 },
-  { text:"Sit down.",             category:"Basics",    tier:2 },
-  { text:"Good job!",             category:"Basics",    tier:2 },
-  { text:"Be quiet.",             category:"Basics",    tier:2 },
-  { text:"I am fine.",            category:"Feelings",  tier:2 },
-  { text:"What is your name?",      category:"Greetings", tier:3 },
-  { text:"Where are you from?",     category:"Greetings", tier:3 },
-  { text:"Where is the bathroom?",  category:"Places",    tier:3 },
-  { text:"I am learning ASL.",      category:"Basics",    tier:3 },
-  { text:"Please sign slower.",     category:"Basics",    tier:3 },
-  { text:"What time is it?",        category:"Time",      tier:3 },
-  { text:"What day is today?",      category:"Time",      tier:3 },
-  { text:"I am busy today.",        category:"Time",      tier:3 },
-  { text:"Do you have a dog?",      category:"Family",    tier:3 },
-  { text:"How old are you?",        category:"Basics",    tier:3 },
-  { text:"I live in Oklahoma.",     category:"Places",    tier:3 },
-  { text:"Are you okay?",           category:"Feelings",  tier:3 },
-  { text:"I need to go.",           category:"Basics",    tier:3 },
-  { text:"Let's go outside.",       category:"Basics",    tier:3 },
-  { text:"Do you want food?",       category:"Food",      tier:3 },
-  { text:"Can you please sign slower?",    category:"Basics",  tier:4 },
-  { text:"What is your favorite color?",   category:"Basics",  tier:4 },
-  { text:"I have a brother and a sister.", category:"Family",  tier:4 },
-  { text:"Do you want to play outside?",   category:"Basics",  tier:4 },
-  { text:"What school do you go to?",      category:"School",  tier:4 },
-  { text:"Can I have some water please?",  category:"Basics",  tier:4 },
-  { text:"What do you want to eat?",       category:"Food",    tier:4 },
-  { text:"My mom is at the store.",        category:"Family",  tier:4 },
-  { text:"I like pizza and hamburgers.",   category:"Food",    tier:4 },
-  { text:"See you tomorrow at school.",    category:"School",  tier:4 },
-  { text:"I need help with my homework.",  category:"School",  tier:4 },
-  { text:"What is your favorite sport?",   category:"Basics",  tier:4 },
-  { text:"What do you want to do today?",            category:"Basics",  tier:5 },
-  { text:"My favorite subject in school is math.",   category:"School",  tier:5 },
-  { text:"Can you show me how to sign that again?",  category:"Basics",  tier:5 },
-  { text:"I don't understand, can you repeat that?", category:"Basics",  tier:5 },
-  { text:"Where do you want to go for dinner?",      category:"Food",    tier:5 },
-  { text:"I have been learning ASL for a while.",    category:"Basics",  tier:5 },
-  { text:"My birthday is coming up really soon.",    category:"Family",  tier:5 },
-  { text:"We should practice signing every day.",    category:"Basics",  tier:5 },
-  { text:"What is your favorite movie or show?",     category:"Basics",  tier:5 },
-  { text:"I want to learn more signs every day.",    category:"Basics",  tier:5 },
+  { answer:"Hello!",            category:"Greetings", tier:1, video:"" },
+  { answer:"Goodbye.",          category:"Greetings", tier:1, video:"" },
+  { answer:"Please.",           category:"Basics",    tier:1, video:"" },
+  { answer:"Thank you.",        category:"Basics",    tier:1, video:"" },
+  { answer:"You're welcome.",   category:"Basics",    tier:1, video:"" },
+  { answer:"Sorry.",            category:"Basics",    tier:1, video:"" },
+  { answer:"Yes.",              category:"Basics",    tier:1, video:"" },
+  { answer:"No.",               category:"Basics",    tier:1, video:"" },
+  { answer:"Help!",             category:"Basics",    tier:1, video:"" },
+  { answer:"I love you.",       category:"Feelings",  tier:1, video:"" },
+  { answer:"More.",             category:"Basics",    tier:1, video:"" },
+  { answer:"Stop.",             category:"Basics",    tier:1, video:"" },
+  { answer:"How are you?",          category:"Greetings", tier:2, video:"" },
+  { answer:"I am happy.",           category:"Feelings",  tier:2, video:"" },
+  { answer:"I am sad.",             category:"Feelings",  tier:2, video:"" },
+  { answer:"I am tired.",           category:"Feelings",  tier:2, video:"" },
+  { answer:"I am hungry.",          category:"Feelings",  tier:2, video:"" },
+  { answer:"I am scared.",          category:"Feelings",  tier:2, video:"" },
+  { answer:"Good morning.",         category:"Greetings", tier:2, video:"" },
+  { answer:"Good night.",           category:"Greetings", tier:2, video:"" },
+  { answer:"See you later.",        category:"Greetings", tier:2, video:"" },
+  { answer:"Nice to meet you.",     category:"Greetings", tier:2, video:"" },
+  { answer:"My name is ___.",       category:"Greetings", tier:2, video:"" },
+  { answer:"I don't know.",         category:"Basics",    tier:2, video:"" },
+  { answer:"Can you help me?",      category:"Basics",    tier:2, video:"" },
+  { answer:"I don't understand.",   category:"Basics",    tier:2, video:"" },
+  { answer:"Wait a minute.",        category:"Basics",    tier:2, video:"" },
+  { answer:"Come here.",            category:"Basics",    tier:2, video:"" },
+  { answer:"Sit down.",             category:"Basics",    tier:2, video:"" },
+  { answer:"Good job!",             category:"Basics",    tier:2, video:"" },
+  { answer:"Be quiet.",             category:"Basics",    tier:2, video:"" },
+  { answer:"I am fine.",            category:"Feelings",  tier:2, video:"" },
+  { answer:"What is your name?",      category:"Greetings", tier:3, video:"" },
+  { answer:"Where are you from?",     category:"Greetings", tier:3, video:"" },
+  { answer:"Where is the bathroom?",  category:"Places",    tier:3, video:"" },
+  { answer:"I am learning ASL.",      category:"Basics",    tier:3, video:"" },
+  { answer:"Please sign slower.",     category:"Basics",    tier:3, video:"" },
+  { answer:"What time is it?",        category:"Time",      tier:3, video:"" },
+  { answer:"What day is today?",      category:"Time",      tier:3, video:"" },
+  { answer:"I am busy today.",        category:"Time",      tier:3, video:"" },
+  { answer:"Do you have a dog?",      category:"Family",    tier:3, video:"" },
+  { answer:"How old are you?",        category:"Basics",    tier:3, video:"" },
+  { answer:"I live in Oklahoma.",     category:"Places",    tier:3, video:"" },
+  { answer:"Are you okay?",           category:"Feelings",  tier:3, video:"" },
+  { answer:"I need to go.",           category:"Basics",    tier:3, video:"" },
+  { answer:"Let's go outside.",       category:"Basics",    tier:3, video:"" },
+  { answer:"Do you want food?",       category:"Food",      tier:3, video:"" },
+  { answer:"Can you please sign slower?",    category:"Basics",  tier:4, video:"" },
+  { answer:"What is your favorite color?",   category:"Basics",  tier:4, video:"" },
+  { answer:"I have a brother and a sister.", category:"Family",  tier:4, video:"" },
+  { answer:"Do you want to play outside?",   category:"Basics",  tier:4, video:"" },
+  { answer:"What school do you go to?",      category:"School",  tier:4, video:"" },
+  { answer:"Can I have some water please?",  category:"Basics",  tier:4, video:"" },
+  { answer:"What do you want to eat?",       category:"Food",    tier:4, video:"" },
+  { answer:"My mom is at the store.",        category:"Family",  tier:4, video:"" },
+  { answer:"I like pizza and hamburgers.",   category:"Food",    tier:4, video:"" },
+  { answer:"See you tomorrow at school.",    category:"School",  tier:4, video:"" },
+  { answer:"I need help with my homework.",  category:"School",  tier:4, video:"" },
+  { answer:"What is your favorite sport?",   category:"Basics",  tier:4, video:"" },
+  { answer:"What do you want to do today?",            category:"Basics",  tier:5, video:"" },
+  { answer:"My favorite subject in school is math.",   category:"School",  tier:5, video:"" },
+  { answer:"Can you show me how to sign that again?",  category:"Basics",  tier:5, video:"" },
+  { answer:"I don't understand, can you repeat that?", category:"Basics",  tier:5, video:"" },
+  { answer:"Where do you want to go for dinner?",      category:"Food",    tier:5, video:"" },
+  { answer:"I have been learning ASL for a while.",    category:"Basics",  tier:5, video:"" },
+  { answer:"My birthday is coming up really soon.",    category:"Family",  tier:5, video:"" },
+  { answer:"We should practice signing every day.",    category:"Basics",  tier:5, video:"" },
+  { answer:"What is your favorite movie or show?",     category:"Basics",  tier:5, video:"" },
+  { answer:"I want to learn more signs every day.",    category:"Basics",  tier:5, video:"" },
 ];
 
 // ─── Storage ─────────────────────────────────────────────────
-// Phrases stored in localStorage
-// Video links stored separately: key = 'asl_link_' + index in allPhrases
 function loadPhrases() {
-  try { const s=localStorage.getItem('asl_phrases'); if(s) return JSON.parse(s); } catch(e){}
+  try { const s=localStorage.getItem('asl_v2_phrases'); if(s) return JSON.parse(s); } catch(e){}
   return JSON.parse(JSON.stringify(DEFAULT_PHRASES));
 }
-function savePhrases() { try { localStorage.setItem('asl_phrases', JSON.stringify(allPhrases)); } catch(e){} }
+function savePhrases() { try { localStorage.setItem('asl_v2_phrases', JSON.stringify(allPhrases)); } catch(e){ alert('Storage error — changes may not save.'); } }
 
-function linkKey(text) { return 'asl_link_'+btoa(unescape(encodeURIComponent(text))).replace(/[=+/]/g,'_'); }
-function saveLink(text, url) { try { localStorage.setItem(linkKey(text), url); } catch(e){ alert('Could not save — storage full.'); } }
-function loadLink(text) { try { return localStorage.getItem(linkKey(text))||''; } catch(e){ return ''; } }
-function deleteLink(text) { try { localStorage.removeItem(linkKey(text)); } catch(e){} }
-
-// Convert Google Drive share link → embeddable link
-function driveEmbedUrl(raw) {
+// ─── YouTube embed ────────────────────────────────────────────
+function youtubeEmbedUrl(raw) {
   if (!raw || !raw.trim()) return null;
   raw = raw.trim();
-  // Already a direct/embed link
-  if (raw.includes('drive.google.com/file/d/')) {
-    const m = raw.match(/\/file\/d\/([^/]+)/);
-    if (m) return `https://drive.google.com/file/d/${m[1]}/preview`;
-  }
-  // drive.google.com/open?id=
-  const m2 = raw.match(/[?&]id=([^&]+)/);
-  if (m2) return `https://drive.google.com/file/d/${m2[1]}/preview`;
+  // youtu.be/ID
+  let m = raw.match(/youtu\.be\/([A-Za-z0-9_-]{11})/);
+  if (m) return `https://www.youtube.com/embed/${m[1]}?rel=0&modestbranding=1`;
+  // watch?v=ID
+  m = raw.match(/[?&]v=([A-Za-z0-9_-]{11})/);
+  if (m) return `https://www.youtube.com/embed/${m[1]}?rel=0&modestbranding=1`;
+  // already embed
+  m = raw.match(/youtube\.com\/embed\/([A-Za-z0-9_-]{11})/);
+  if (m) return `https://www.youtube.com/embed/${m[1]}?rel=0&modestbranding=1`;
+  // Shorts
+  m = raw.match(/youtube\.com\/shorts\/([A-Za-z0-9_-]{11})/);
+  if (m) return `https://www.youtube.com/embed/${m[1]}?rel=0&modestbranding=1`;
   return null;
 }
 
-let allPhrases = loadPhrases();
-
 // ─── Game state ───────────────────────────────────────────────
+let allPhrases = loadPhrases();
 let queues={}, turn=0, scores=[0,0], names=['Player 1','Player 2'];
 let roundNum=0, totalRounds=10, chosenPts=0, currentCard=null;
 const ptColors=['','var(--c1)','var(--c2)','var(--c3)','var(--c4)','var(--c5)'];
@@ -396,24 +402,23 @@ function pickPoints(pts) {
   chip.textContent=`${pts} pt${pts>1?'s':''} · ${ptLabels[pts]}`;
   chip.style.cssText=`background:${ptColors[pts]}22;color:${ptColors[pts]};border:1px solid ${ptColors[pts]}55`;
 
-  // Load video
+  // Render video
   const wrap=document.getElementById('videoWrap');
   wrap.innerHTML='';
-  const savedLink=loadLink(currentCard.text);
-  const embedUrl=driveEmbedUrl(savedLink);
+  const embedUrl=youtubeEmbedUrl(currentCard.video);
   if (embedUrl) {
     const iframe=document.createElement('iframe');
     iframe.src=embedUrl;
-    iframe.allow='autoplay';
+    iframe.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
     iframe.allowFullscreen=true;
     wrap.appendChild(iframe);
   } else {
-    wrap.innerHTML='<div class="video-placeholder-msg">📹 No video yet<br><span style="font-size:.7rem;opacity:.6">Add one in Manage Phrases</span></div>';
+    wrap.innerHTML=`<div class="video-placeholder-msg">📹 No video yet for this phrase<br><span style="font-size:.72rem;opacity:.6">Add one in ⚙️ Manage Phrases</span></div>`;
   }
 
   document.getElementById('answerBox').classList.remove('shown');
   document.getElementById('resultRow').classList.remove('shown');
-  document.querySelector('.reveal-btn').style.display='';
+  document.getElementById('revealBtn').style.display='';
   document.getElementById('pickPhase').style.display='none';
   document.getElementById('signPhase').style.display='';
   const b=document.getElementById('turnBanner');
@@ -422,11 +427,11 @@ function pickPoints(pts) {
 }
 
 function revealAnswer() {
-  document.getElementById('answerText').textContent=currentCard.text;
+  document.getElementById('answerText').textContent=currentCard.answer;
   document.getElementById('answerCategory').textContent=currentCard.category;
   document.getElementById('answerBox').classList.add('shown');
   document.getElementById('resultRow').classList.add('shown');
-  document.querySelector('.reveal-btn').style.display='none';
+  document.getElementById('revealBtn').style.display='none';
 }
 
 function result(nailed) {
@@ -458,7 +463,7 @@ function spawnPointPop(text,playerIdx) {
 
 function showWinner() {
   document.getElementById('finalName1').textContent=names[0]; document.getElementById('finalName2').textContent=names[1];
-  document.getElementById('finalPts1').textContent=scores[0];  document.getElementById('finalPts2').textContent=scores[1];
+  document.getElementById('finalPts1').textContent=scores[0]; document.getElementById('finalPts2').textContent=scores[1];
   let emoji,title,sub;
   if(scores[0]>scores[1]){emoji='🏆';title=`${names[0]} wins!`;sub=`${scores[0]} to ${scores[1]} — awesome signing!`;document.getElementById('finalBox1').classList.add('winner-box');}
   else if(scores[1]>scores[0]){emoji='🏆';title=`${names[1]} wins!`;sub=`${scores[1]} to ${scores[0]} — awesome signing!`;document.getElementById('finalBox2').classList.add('winner-box');}
@@ -483,34 +488,40 @@ function renderManage() {
     const section=document.createElement('div'); section.className='tier-section';
     const tp=allPhrases.filter(p=>p.tier===t);
     const label=['','Easy','Medium','Hard','Expert','Champ'][t];
-    section.innerHTML=`<div class="tier-label">Tier ${t} — ${label} (${tp.length})</div>`;
+    section.innerHTML=`<div class="tier-label">Tier ${t} — ${label} (${tp.length} phrases)</div>`;
     if(!tp.length){ section.innerHTML+='<div class="empty-tier">No phrases yet.</div>'; }
     else {
       tp.forEach(p=>{
         const idx=allPhrases.indexOf(p);
-        const savedLink=loadLink(p.text);
-        const hasLink=!!savedLink;
-        const item=document.createElement('div'); item.className='phrase-item';
+        const hasVideo=!!youtubeEmbedUrl(p.video);
+        const item=document.createElement('div'); item.className='phrase-item'; item.id=`item_${idx}`;
         item.innerHTML=`
-          <div class="phrase-item-top">
-            <div style="flex:1">
-              <div class="phrase-item-text">${p.text}</div>
-              <div class="phrase-item-cat">${p.category}</div>
+          <div class="phrase-item-header">
+            <div class="phrase-item-info">
+              <div class="phrase-item-text">${p.answer}</div>
+              <div class="phrase-item-meta">${p.category} &nbsp;·&nbsp; <span class="${hasVideo?'phrase-has-video':''}">${hasVideo?'✓ Video linked':'No video'}</span></div>
             </div>
-            <button class="delete-btn" onclick="deletePhrase(${idx})">Delete</button>
+            <div class="item-action-row">
+              <button class="edit-btn" onclick="toggleEdit(${idx})">Edit</button>
+              <button class="delete-btn" onclick="deletePhrase(${idx})">Delete</button>
+            </div>
           </div>
-          <div class="video-link-row">
-            <input
-              class="video-link-input${hasLink?' has-link':''}"
-              id="link_${idx}"
-              type="url"
-              placeholder="Paste Google Drive link here…"
-              value="${savedLink}"
-            />
-            <button class="save-link-btn" onclick="saveLink_('${idx}')">Save</button>
-            ${hasLink?`<button class="clear-link-btn" onclick="clearLink('${idx}')">✕</button>`:''}
-          </div>
-          <div class="video-status${hasLink?' show':''}" id="status_${idx}">✓ Video linked</div>`;
+          <div class="edit-panel" id="edit_${idx}">
+            <div class="edit-label">Answer text</div>
+            <input class="edit-input" id="edit_answer_${idx}" type="text" value="${p.answer.replace(/"/g,'&quot;')}" placeholder="What this phrase means"/>
+            <div class="edit-label">Category</div>
+            <input class="edit-input" id="edit_cat_${idx}" type="text" value="${p.category}" placeholder="e.g. Greetings"/>
+            <div class="edit-label">YouTube link ${hasVideo?'<span style="color:#6bcb77">✓</span>':''}</div>
+            <input class="edit-input${hasVideo?' linked':''}" id="edit_vid_${idx}" type="url" value="${p.video||''}" placeholder="Paste YouTube link here…"/>
+            <div class="edit-label">Difficulty</div>
+            <select class="edit-input" id="edit_tier_${idx}" style="cursor:pointer">
+              ${[1,2,3,4,5].map(n=>`<option value="${n}"${p.tier===n?' selected':''}>${n} — ${['','Easy','Medium','Hard','Expert','Champ'][n]}</option>`).join('')}
+            </select>
+            <div class="edit-btn-row">
+              <button class="edit-save-btn" onclick="saveEdit(${idx})">✓ Save</button>
+              <button class="edit-cancel-btn" onclick="toggleEdit(${idx})">Cancel</button>
+            </div>
+          </div>`;
         section.appendChild(item);
       });
     }
@@ -518,36 +529,39 @@ function renderManage() {
   }
 }
 
-function saveLink_(idx) {
-  const input=document.getElementById('link_'+idx);
-  const url=input.value.trim();
-  if(!url){ alert('Please paste a Google Drive link first.'); return; }
-  if(!driveEmbedUrl(url)){ alert('That doesn\'t look like a Google Drive link. Make sure it\'s a drive.google.com share link.'); return; }
-  saveLink(allPhrases[idx].text, url);
-  input.classList.add('has-link');
-  const status=document.getElementById('status_'+idx);
-  status.textContent='✓ Video linked'; status.classList.add('show');
-  renderManage();
+function toggleEdit(idx) {
+  const panel=document.getElementById('edit_'+idx);
+  panel.classList.toggle('open');
 }
 
-function clearLink(idx) {
-  deleteLink(allPhrases[idx].text);
+function saveEdit(idx) {
+  const answer=document.getElementById('edit_answer_'+idx).value.trim();
+  const cat=document.getElementById('edit_cat_'+idx).value.trim();
+  const vid=document.getElementById('edit_vid_'+idx).value.trim();
+  const tier=parseInt(document.getElementById('edit_tier_'+idx).value);
+  if(!answer){alert('Answer text cannot be empty.');return;}
+  allPhrases[idx]={answer, category:cat||'General', video:vid, tier};
+  savePhrases();
   renderManage();
+  // Re-open edit panel so user sees confirmation
 }
 
 function addPhrase() {
-  const text=document.getElementById('newPhrase').value.trim();
+  const answer=document.getElementById('newAnswer').value.trim();
   const category=document.getElementById('newCategory').value.trim()||'General';
+  const video=document.getElementById('newVideo').value.trim();
   const tier=parseInt(document.getElementById('newTier').value);
-  if(!text){alert('Please enter a phrase.');return;}
-  allPhrases.push({text,category,tier}); savePhrases();
-  document.getElementById('newPhrase').value=''; document.getElementById('newCategory').value='';
+  if(!answer){alert('Please enter the answer text.');return;}
+  allPhrases.push({answer,category,video,tier});
+  savePhrases();
+  document.getElementById('newAnswer').value='';
+  document.getElementById('newCategory').value='';
+  document.getElementById('newVideo').value='';
   renderManage();
 }
 
 function deletePhrase(idx) {
-  if(!confirm(`Delete "${allPhrases[idx].text}"?`)) return;
-  deleteLink(allPhrases[idx].text);
+  if(!confirm(`Delete "${allPhrases[idx].answer}"?`)) return;
   allPhrases.splice(idx,1); savePhrases(); renderManage();
 }
 
